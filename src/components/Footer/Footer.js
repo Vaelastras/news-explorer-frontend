@@ -3,6 +3,7 @@ import './footer.css';
 import gitLogo from "../../images/icons/github.png";
 import facebook from "../../images/icons/facebook.png";
 import gmail from "../../images/icons/email.png";
+import vk from "../../images/icons/vk.png";
 
 function Footer() {
   return (
@@ -27,7 +28,10 @@ function Footer() {
             <a href="https://www.facebook.com/Vaelastras/" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={facebook} alt='facebook'/></a>
           </li>
           <li className="footer__social-link">
-            <a href="mailTo: vaelastras@gmail.com" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={gmail} alt='facebook'/></a>
+            <a href="mailTo: vaelastras@gmail.com" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={gmail} alt='mail me'/></a>
+          </li>
+          <li className="footer__social-link">
+            <a href="https://vk.com/vaelastras" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={vk} alt='vk'/></a>
           </li>
         </ul>
       </div>
