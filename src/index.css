@@ -1,3 +1,11 @@
 @import "./vendor/normalize.css";
 @import "./fonts/fonts.css";
 
+
+header, h1, h2, h3, p, div, nav, ul, li, form, input, button, img {
+  border: 1px tomato solid
+}
+
+body {
+  background-color: teal;
+}
