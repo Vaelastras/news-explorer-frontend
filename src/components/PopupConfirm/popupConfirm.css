@@ -1,0 +1,17 @@
+
+.popup__confirm {
+	margin: 0 36px 51px;
+	max-width: 228px;
+	font-family: 'Inter', 'Arial', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	color: #2F71E5;
+}
+
+.popup__confirm:hover {
+	transition: all .5s linear;
+	color: #347EFF;
+	cursor: pointer;
+}
