@@ -1,21 +1,20 @@
 .search {
+  position: relative;
   background-image: url('../../images/searchform-background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 576px;
   max-width: 1440px;
   margin: 0 auto;
-  padding-top: 80px;
+  padding: 160px 0 80px 0;
 }
 
 .search__form {
   max-width: 608px;
-  margin: 0 auto;
+  margin: 0px auto;
 }
 
 .search__title {
-  /* height: 128px; */
   font-family: 'Robotos', 'Arial', sans-serif;
   font-style: normal;
   color: white;
@@ -82,11 +81,10 @@
 
 
 @media screen and (max-width: 900px) {
-  
   .search {
-    height: 400px;
+    padding: 104px 0 48px;
   }
-
+  
   .search__form {
     max-width: 452px;
   }
@@ -95,8 +93,6 @@
     max-width: 385px;
     font-size: 36px;
     line-height: 40px;
-    height: 80px;
-
   }
 
   .search__subtitle {

@@ -1,13 +1,13 @@
 import React from 'react';
-import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import './popupConfirm.css';
 
-function PopupConfirm (props) {
-  const {isOpen, onClose} = props;
+function PopupConfirm(props) {
+  const { isOpen, onClose } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <PopupWithForm
@@ -17,7 +17,7 @@ function PopupConfirm (props) {
       name="register"
       title="Регистрация"
     />
-  )
+  );
 }
 
 export default PopupConfirm;

@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import './App.css';
+import Header from '../Header/Header';
 
-function App () {
+function App() {
   const [isOpenRegisterPopup, setIsOpenRegisterPopup] = useState('');
   const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState('');
-  const [isOpenLoginPopup, setIsOpenLoginPopup] = useState('')
+  const [isOpenLoginPopup, setIsOpenLoginPopup] = useState('');
 
-  function closeAllPopups () {
+  function closeAllPopups() {
     setIsOpenConfirmPopup(false);
     setIsOpenRegisterPopup(false);
     setIsOpenLoginPopup(false);
@@ -19,22 +20,22 @@ function App () {
     isOpenRegisterPopup(true);
   }
 
-  function handleOpenLoginPopup () {
+  function handleOpenLoginPopup() {
     isOpenLoginPopup(true);
   }
 
-  function handleOpenConfirmPopup () {
+  function handleOpenConfirmPopup() {
     isOpenConfirmPopup(true);
   }
 
-  function handlePopupSwitcher () {
+  function handlePopupSwitcher() {
     if (isOpenRegisterPopup) {
       handleOpenRegisterPopup();
       setIsOpenRegisterPopup(false);
     }
     if (isOpenLoginPopup) {
       handleOpenLoginPopup();
-      setIsOpenLoginPopup(false)
+      setIsOpenLoginPopup(false);
     }
     if (isOpenConfirmPopup) {
       handleOpenConfirmPopup();
@@ -42,10 +43,9 @@ function App () {
     }
   }
 
-
-
   return (
     <>
+      <Header/>
       <SearchForm/>
       <About/>
       <Footer/>

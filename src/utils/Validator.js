@@ -1,5 +1,4 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 function FormValidator() {
   const [values, setValues] = React.useState({});
@@ -7,12 +6,12 @@ function FormValidator() {
   const [isValid, setIsValid] = React.useState(false);
 
   const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
+    const { target } = event;
+    const { name } = target;
+    const { value } = target;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
@@ -21,10 +20,12 @@ function FormValidator() {
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid]
+    [setValues, setErrors, setIsValid],
   );
 
-  return { values, handleChange, errors, isValid, resetForm };
+  return {
+    values, handleChange, errors, isValid, resetForm,
+  };
 }
 
 export default FormValidator;

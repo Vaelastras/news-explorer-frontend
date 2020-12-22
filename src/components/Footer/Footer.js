@@ -1,14 +1,14 @@
 import React from 'react';
 import './footer.css';
-import gitLogo from "../../images/icons/github.png";
-import facebook from "../../images/icons/facebook.png";
-import gmail from "../../images/icons/email.png";
-import vk from "../../images/icons/vk.png";
+import gitLogo from '../../images/icons/github.png';
+import facebook from '../../images/icons/facebook.png';
+import gmail from '../../images/icons/email.png';
+import vk from '../../images/icons/vk.png';
 
 function Footer() {
   return (
     <footer className="footer">
-      <p className="footer__copyrigth">
+      <p className="footer__copyright">
         &copy; {new Date().getFullYear()} Supersite, Powered by News API
       </p>
       <div className="footer__wrapper">
@@ -37,8 +37,7 @@ function Footer() {
       </div>
 
     </footer>
-  )
-
+  );
 }
 
 export default Footer;

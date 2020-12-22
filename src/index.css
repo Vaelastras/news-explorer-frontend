@@ -1,11 +1,14 @@
 @import "./vendor/normalize.css";
 @import "./fonts/fonts.css";
 
-
-header, h1, h2, h3, p, div, nav, ul, li, form, input, button, img {
-  border: 1px tomato solid
+.root {
+  position: relative;
+  max-width: 1440px;
+  background-color: white;
+  margin: 0 auto;
 }
 
-body {
-  background-color: teal;
-}
+
+/*header, h1, h2, h3, p, div, nav, ul, li, form, input, button, img {*/
+/*  border: 1px tomato solid*/
+/*}*/

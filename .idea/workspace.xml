@@ -2,18 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b5db65a-0846-4c90-a123-d3cf7d9913bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/PopupLogin/PopupLogin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PopupLogin/popupLogin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PopupRegister/popupRegister.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PopupWithForm/popupWithForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/Validator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/logout-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/logout-ligth.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/About/About.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/About/About.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/footer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoResult/NoResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NoResult/NoResult.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupConfirm/PopupConfirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupConfirm/PopupConfirm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupLogin/PopupLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupLogin/PopupLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Preloader/Preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Preloader/Preloader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Validator.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +38,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1les6GAfJmrWqfbYVAWJzvSPTWa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -48,9 +66,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -67,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607968715121</updated>
       <workItem from="1607968719635" duration="3199000" />
-      <workItem from="1608280556895" duration="12427000" />
+      <workItem from="1608280556895" duration="34351000" />
     </task>
     <servers />
   </component>

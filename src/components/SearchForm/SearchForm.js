@@ -1,7 +1,7 @@
+import React from 'react';
 import './searchForm.css';
 
 function SearchForm() {
-
   return (
     <section className="search">
       <form className="search__form">
@@ -13,8 +13,7 @@ function SearchForm() {
         </div>
       </form>
     </section>
-  )
-  
+  );
 }
 
 export default SearchForm;
