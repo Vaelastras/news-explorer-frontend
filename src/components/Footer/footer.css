@@ -11,7 +11,7 @@
   display: flex;
 }
 
-.footer__copyrigth {
+.footer__copyright {
   max-width: 433px;
   margin: 0px 0px 0px 104px;
   font-family: 'Roboto', 'Arial', sans-serif;
@@ -75,7 +75,7 @@
 
 @media screen and (max-width: 900px) {
 
-  .footer__copyrigth {
+  .footer__copyright {
     max-width: 288px;
     margin: 24px 5px 18px 40px; /* second margin is optional */
     text-align: center;
@@ -103,7 +103,7 @@
     flex-direction: column;
   }
 
-  .footer__copyrigth {
+  .footer__copyright {
     margin-left: 0px;
   }
 
@@ -116,7 +116,7 @@
 
 @media screen and (max-width: 550px) {
 
-  .footer__copyrigth {
+  .footer__copyright {
     width: 288px;
     order: 1;
     margin: 40px 16px 70px;

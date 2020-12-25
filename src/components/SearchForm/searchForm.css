@@ -1,6 +1,6 @@
 .search {
   position: relative;
-  background-image: url('../../images/searchform-background.png');
+  background-image: url('../../images/backgrounds/searchform-background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -84,7 +84,7 @@
   .search {
     padding: 104px 0 48px;
   }
-  
+
   .search__form {
     max-width: 452px;
   }
@@ -113,7 +113,9 @@
 @media screen and (max-width: 550px) {
 
   .search {
-    height: 536px;
+    height: 450px;
+    background-image: url('../../images/backgrounds/searchform-background-small.png');
+
   }
 
   .search__form {
@@ -133,7 +135,7 @@
   }
 
   .search__button {
-    width: 288px;
+    width: 100%;
     margin-top: 16px;
     height: 56px;
   }

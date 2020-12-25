@@ -1,34 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1b5db65a-0846-4c90-a123-d3cf7d9913bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/logout-dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/logout-ligth.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Article/Article.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Article/article.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ArticleList/ArticlesList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ArticleList/articles-list.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Articles/Articles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Articles/articles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Burger/Burger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Burger/burger.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Main/Main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Main/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Summary/Summary.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Summary/summary.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/CurrentUserContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/backgrounds/image_06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/backgrounds/searchform-background-small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/backgrounds/searchform-background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/close-btn-dark.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/bookmark-hover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/bookmark-marked.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/bookmark-normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/burger-black.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/burger-ligth.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/trash-hover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/icons/trash.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/sampleCards.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/About/About.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/About/About.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/About/about.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/About/about.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/footer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NoResult/NoResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NoResult/NoResult.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupConfirm/PopupConfirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupConfirm/PopupConfirm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupLogin/PopupLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupLogin/PopupLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Preloader/Preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Preloader/Preloader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm/popupWithForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm/popupWithForm.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Validator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/close-btn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/close-btn-white.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/searchform-background.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +52,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -72,12 +86,15 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/images/icons" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -89,7 +106,8 @@
       <option name="presentableId" value="Default" />
       <updated>1607968715121</updated>
       <workItem from="1607968719635" duration="3199000" />
-      <workItem from="1608280556895" duration="34351000" />
+      <workItem from="1608280556895" duration="62832000" />
+      <workItem from="1608716549250" duration="45661000" />
     </task>
     <servers />
   </component>
