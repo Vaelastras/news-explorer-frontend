@@ -5,44 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b5db65a-0846-4c90-a123-d3cf7d9913bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Article/Article.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Article/article.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ArticleList/ArticlesList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ArticleList/articles-list.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Articles/Articles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Articles/articles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Burger/Burger.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Burger/burger.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Summary/Summary.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Summary/summary.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/CurrentUserContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/backgrounds/image_06.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/backgrounds/searchform-background-small.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/backgrounds/searchform-background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/close-btn-dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/bookmark-hover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/bookmark-marked.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/bookmark-normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/burger-black.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/burger-ligth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/trash-hover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/icons/trash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/sampleCards.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/About/about.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/About/about.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Burger/Burger.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Burger/Burger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/footer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoResult/noResult.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NoResult/noResult.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupRegister/PopupRegister.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm/PopupWithForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm/popupWithForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm/popupWithForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Preloader/preloader.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Preloader/preloader.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/close-btn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/close-btn-white.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/searchform-background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Summary/summary.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Summary/summary.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +37,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1les6GAfJmrWqfbYVAWJzvSPTWa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -107,7 +82,7 @@
       <updated>1607968715121</updated>
       <workItem from="1607968719635" duration="3199000" />
       <workItem from="1608280556895" duration="62832000" />
-      <workItem from="1608716549250" duration="45661000" />
+      <workItem from="1608716549250" duration="63328000" />
     </task>
     <servers />
   </component>

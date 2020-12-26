@@ -1,5 +1,6 @@
 import React from 'react';
 import './popupWithForm.css';
+import { Link } from 'react-router-dom';
 
 function PopupWithForm(props) {
   const {
@@ -21,7 +22,7 @@ function PopupWithForm(props) {
           <h2 className="popup__title">{title}</h2>
           {children}
           <p className="popup__text">{text}
-            <span className="popup__switcher" onClick={onSwitchPopup}>{buttonDescription}</span>
+            <Link to='/' className="popup__switcher" onClick={onSwitchPopup}>{buttonDescription}</Link>
           </p>
         </form>
         <button className="popup__close" type="button" onClick={onClose} />

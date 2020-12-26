@@ -13,7 +13,7 @@
 
 .footer__copyright {
   max-width: 433px;
-  margin: 0px 0px 0px 104px;
+  margin: 0 0 0 104px;
   font-family: 'Roboto', 'Arial', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -25,7 +25,7 @@
   display: flex;
   list-style: none;
   place-items: center;
-  padding: 0px;
+  padding: 0;
 }
 
 .footer__list {
@@ -48,8 +48,8 @@
 .footer__social-links {
   display: flex;
   justify-content: space-between;
-  margin: 32px 104px 26px 0px;
-  padding: 0px;
+  margin: 32px 104px 26px 0;
+  padding: 0;
   list-style-type: none;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .footer__social-link:last-of-type {
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 .footer__social-icon:hover {
@@ -74,7 +74,6 @@
 
 
 @media screen and (max-width: 900px) {
-
   .footer__copyright {
     max-width: 288px;
     margin: 24px 5px 18px 40px; /* second margin is optional */
@@ -83,50 +82,46 @@
 
   .footer__links {
     width: 264px;
-    margin: 21px 0px 21px 0px;
-    padding: 0px;
+    margin: 21px 0 21px 0;
+    padding: 0;
   }
 
   .footer__list:last-of-type {
-    margin-right: 0px;
+    margin-right: 0;
   }
 
   .footer__social-links {
-    margin: 21px 40px 21px 0px;
+    margin: 21px 40px 21px 0;
   }
 }
 
 
 @media screen and (max-width: 750px) {
-
   .footer {
     flex-direction: column;
   }
 
   .footer__copyright {
-    margin-left: 0px;
+    margin-left: 0;
   }
 
   .footer__social-links {
     margin-right: 0;
   }
-
 }
 
 
 @media screen and (max-width: 550px) {
-
   .footer__copyright {
     width: 288px;
     order: 1;
     margin: 40px 16px 70px;
-
   }
 
   .footer__wrapper {
     width: 288px;
     justify-content: space-between;
-    margin: 20px 16px 0px;
+    margin: 20px 16px 0;
   }
 
   .footer__links {
@@ -135,18 +130,17 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
   }
 
   .footer__link {
-    margin-left: 0px;
+    margin-left: 0;
   }
 
   .footer__social-links {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 0px;
+    margin: 0;
   }
-
 }

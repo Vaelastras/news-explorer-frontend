@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './footer.css';
 import gitLogo from '../../images/icons/github.png';
 import facebook from '../../images/icons/facebook.png';
 import gmail from '../../images/icons/email.png';
 import vk from '../../images/icons/vk.png';
 
-function Footer() {
+function Footer(props) {
+  const { topScrollPage } = props;
   return (
     <footer className="footer">
       <p className="footer__copyright">
@@ -14,21 +16,21 @@ function Footer() {
       <div className="footer__wrapper">
         <ul className="footer__links">
           <li className="footer__list">
-            <a className ="footer__link" href="./" target="_blank">Главная</a>
+            <Link className="footer__link" to='/' onClick={topScrollPage}>Главная</Link>
           </li>
           <li className="footer__list">
-            <a className ="footer__link" href="https://praktikum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
+            <a className="footer__link" href="https://praktikum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
           </li>
         </ul>
         <ul className="footer__social-links">
           <li className="footer__social-link">
-            <a href="https://github.com/Vaelastras" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={gitLogo} alt='Github logo'/></a>
+            <a href="https://github.com/Vaelastras" target="_blank" rel="noreferrer"><img className="footer__social-icon" src={gitLogo} alt='Github logo'/></a>
           </li>
           <li className="footer__social-link">
-            <a href="https://www.facebook.com/Vaelastras/" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={facebook} alt='facebook'/></a>
+            <a href="https://www.facebook.com/Vaelastras/" target="_blank" rel="noreferrer"><img className="footer__social-icon" src={facebook} alt='facebook'/></a>
           </li>
           <li className="footer__social-link">
-            <a href="mailTo: vaelastras@gmail.com" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={gmail} alt='mail me'/></a>
+            <a href="mailTo: vaelastras@gmail.com" target="_blank" rel="noreferrer"><img className="footer__social-icon" src={gmail} alt='mail me'/></a>
           </li>
           <li className="footer__social-link">
             <a href="https://vk.com/vaelastras" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={vk} alt='vk'/></a>

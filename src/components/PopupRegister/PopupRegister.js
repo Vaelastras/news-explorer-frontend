@@ -4,10 +4,10 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
 function PopupRegister(props) {
+  const { isOpen, onClose, onSwitchPopup } = props;
   const {
     values, handleChange, errors, isValid,
   } = Validator();
-  const { isOpen, onClose, onSwitchPopup } = props;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -68,7 +68,7 @@ function PopupRegister(props) {
         required
       />
       <span id="name-error-register" className="popup__error"> {errors.name || ''} </span>
-      <span id="main-error-register" className="popup__error popup__error_type_register"> ТУТ ДОЛЖЕН БЫТЬ КАКОЙ ТО ТЕКСТ ОШИБКИ REGISTER!</span>
+      <span id="main-error-register" className="popup__error popup__error_type_register"> ТУТ ДОЛЖЕН БЫТЬ КАКОЙ REGISTER!</span>
       <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Войти</button>
     </PopupWithForm>
   );

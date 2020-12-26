@@ -19,16 +19,14 @@ function Burger(props) {
 
       <input type="checkbox" id="checkbox" className="burger__checkbox" onClick={props.isOpen}/>
       <label htmlFor="checkbox" className={`${buttonSwitcher} ${crossButtonDark} ${crossBurgerColorDark}`}/>
-
-      <div className={(props.isOpen ? `burger__list burger__list_active ${backgroundColor}` : `${backgroundColor}`)}>
-
+      <div className={(props.isOpen ? `burger__list burger__list_active burger__layout ${backgroundColor}` : `${backgroundColor}`)}>
         <div className="burger__container">
           <ul className="burger__roster">
             <li className="burger__roster-list"><NavLink exact to="/" className={textColorization}>Главная</NavLink></li>
             <li className="burger__roster-list"><NavLink to="/saved-news" className={textColorization}>Сохранённые статьи</NavLink></li>
           </ul>
 
-          <button className={buttonLogin}>Авторизоваться</button>
+          <button className={buttonLogin} onClick={props.isOpenRegisterPopup} >Авторизоваться</button>
           <NavLink to="/" className={textColorization}>
             <button className={buttonLogout}>Витенька <img className="burger__icon-logout" alt="logout button" src={logoutButtonDark}/> </button>
           </NavLink>
