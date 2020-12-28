@@ -12,10 +12,8 @@ import PopupRegister from '../PopupRegister/PopupRegister';
 import PopupLogin from '../PopupLogin/PopupLogin';
 
 function App() {
-  const [openRegisterPopup, setIsOpenRegisterPopup] = useState(false);
+  const [openRegisterPopup, setOpenRegisterPopup] = useState(false);
   const [openLoginPopup, setIsOpenLoginPopup] = useState(false);
-  // const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState(false);
-  // const [loggedIn, setLoggedIn] = useState(true);
   const [burgerOpen, setBurgerOpen] = useState(false);
   // открытие бургерного меню
   function handleClickBurger() {
@@ -24,36 +22,28 @@ function App() {
   // закрытие всех попапов
   function closeAllPopups() {
     // setIsOpenConfirmPopup(false);
-    setIsOpenRegisterPopup(false);
+    setOpenRegisterPopup(false);
     setIsOpenLoginPopup(false);
   }
 
   // открытие окна регистрации
   function handleOpenRegisterPopup() {
-    setIsOpenRegisterPopup(true);
+    setOpenRegisterPopup(true);
   }
   // открытие окна логина
   function handleOpenLoginPopup() {
-    openLoginPopup(true);
+    setIsOpenLoginPopup(true);
   }
-
-  // function handleOpenConfirmPopup() {
-  //   isOpenConfirmPopup(true);
-  // }
   // переключатель попапов
   function handlePopupSwitcher() {
     if (openRegisterPopup) {
-      handleOpenRegisterPopup();
-      setIsOpenRegisterPopup(false);
+      closeAllPopups();
+      handleOpenLoginPopup();
     }
     if (openLoginPopup) {
-      handleOpenLoginPopup();
-      setIsOpenLoginPopup(false);
+      closeAllPopups();
+      handleOpenRegisterPopup();
     }
-  //   if (isOpenConfirmPopup) {
-  //     handleOpenConfirmPopup();
-  //     setIsOpenConfirmPopup(false);
-  //   }
   }
 
   useEffect(() => {
@@ -76,7 +66,7 @@ function App() {
       document.removeEventListener('click', handleOverlayClose);
       document.removeEventListener('keydown', handleEscClose);
     };
-  });
+  }, []);
 
   function topScrollPage() {
     if (window.pageYOffset > 0) {
@@ -91,7 +81,8 @@ function App() {
           <Header
             isOpenBurgerMenu={burgerOpen}
             isOpen={handleClickBurger}
-            isOpenRegisterPopup={handleOpenRegisterPopup}
+            isOpenLoginPopup={handleOpenLoginPopup}
+
           />
           <SearchForm/>
           <Main />
@@ -100,6 +91,7 @@ function App() {
           <Header
             isOpenBurgerMenu={burgerOpen}
             isOpen={handleClickBurger}
+            isOpenLoginPopup={handleOpenLoginPopup}
           />
           <Summary/>
           <Articles/>
@@ -115,7 +107,7 @@ function App() {
         onSwitchPopup={handlePopupSwitcher}
       />
       <PopupLogin
-        isOpenLoginPopup={openLoginPopup}
+        isOpen={openLoginPopup}
         onClose={closeAllPopups}
         onSwitchPopup={handlePopupSwitcher}
       />

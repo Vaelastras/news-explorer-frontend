@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './popupLogin.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
@@ -9,6 +9,7 @@ function PopupLogin(props) {
     handleChange,
     errors,
     isValid,
+    resetForm,
   } = Validator();
   const {
     isOpen,
@@ -16,8 +17,14 @@ function PopupLogin(props) {
     onSwitchPopup,
   } = props;
 
+  useEffect(() => {
+    resetForm();
+  }, [isOpen, resetForm]);
+
   function handleSubmit(e) {
     e.preventDefault();
+    // eslint-disable-next-line no-console
+    console.log('Login success'); // потом уберу
   }
 
   return (
@@ -35,7 +42,7 @@ function PopupLogin(props) {
           value={values.email || ''}
           onChange={handleChange}
           className="popup__input popup__input_type_email"
-          id="email"
+          id="email-login"
           type="email"
           name="email"
           placeholder="Введите почту"
@@ -50,7 +57,7 @@ function PopupLogin(props) {
           value={values.password || ''}
           onChange={handleChange}
           className="popup__input popup__input_type_password"
-          id="password"
+          id="password-login"
           type="password"
           name="password"
           placeholder="Введите пароль"
@@ -58,11 +65,11 @@ function PopupLogin(props) {
           maxLength="30"
           required
         />
-        <span id="password-error-login" className="popup__input-error" >{errors.password || ''}</span>
+        <span id="password-error-login" className="popup__error" >{errors.password || ''}</span>
 
         <span id="main-error-login" className="popup__error popup__error_type_login">ТУТ ДОЛЖЕН БЫТЬ КАКОЙ ТО ТЕКСТ ОШИБКИ LOGIN!</span>
 
-        <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Зарегистрироваться</button>
+        <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Войти</button>
     </PopupWithForm>
   );
 }

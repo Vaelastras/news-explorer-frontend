@@ -6,7 +6,7 @@ import Burger from '../Burger/Burger';
 
 function Header(props) {
   const {
-    isOpen, isOpenBurgerMenu, isOpenRegisterPopup,
+    isOpen, isOpenBurgerMenu, isOpenLoginPopup,
   } = props;
   const { pathname } = useLocation();
 
@@ -19,11 +19,13 @@ function Header(props) {
    <header className={headerBg}>
     <div className="header__wrapper">
       <Link to='/' className={`header__logo ${headerLogoDark}`}>News Explorer</Link>
-      <Navigation/>
+      <Navigation
+        isOpenLoginPopup={isOpenLoginPopup}
+      />
       <Burger
         isOpen={isOpen}
         isOpenBurgerMenu={isOpenBurgerMenu}
-        isOpenRegisterPopup={isOpenRegisterPopup}
+        isOpenLoginPopup={isOpenLoginPopup}
         />
     </div>
    </header>

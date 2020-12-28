@@ -11,7 +11,7 @@
   visibility: hidden;
   opacity: 0;
   background-color: rgba(0,0,0,.5);
-  transition: visibility 1s, opacity .5s ease-in;
+  transition: visibility .2s, opacity .2s ease-in;
 }
 
 .popup_active {
@@ -99,7 +99,7 @@
 
 .popup__error {
   width: 358px;
-  height: 14px;
+  height: auto;
   display: block;
   margin: 0 auto 8px;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -141,6 +141,15 @@
   background: #347EFF;
   cursor: pointer;
   transition: .2s;
+}
+
+.popup__switcher {
+  color: #2f71e5;
+  cursor: pointer;
+}
+
+.popup__switcher:hover {
+  opacity: 0.7;
 }
 
 

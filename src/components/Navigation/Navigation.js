@@ -7,7 +7,7 @@ import logoutButtonLight from '../../images/icons/logout-ligth.png';
 import logoutButtonDark from '../../images/icons/logout-dark.png';
 
 function Navigation(props) {
-  const { isLoggedIn } = props;
+  const { isLoggedIn, isOpenLoginPopup } = props;
   const { pathname } = useLocation();
 
   const navLinkDark = `${pathname === '/saved-news' ? 'navigation__link_type_black' : ''}`;
@@ -28,7 +28,7 @@ function Navigation(props) {
             <NavLink to="/saved-news" className={`navigation__link ${navLinkDark}`} activeClassName={navLinkActive}>Сохранённые статьи</NavLink>
           </li>
         </ul>
-        <button className={navButtonLogin}>{buttonDisplayName}</button>
+        <button onClick={isOpenLoginPopup} className={navButtonLogin}>{buttonDisplayName}</button>
         <NavLink to="/" className="navigation__link">
           <button className={navButtonLogout}>Вася <img className="navigation__icon-logout" alt="logout button" src={navButtonColor}/></button>
         </NavLink>

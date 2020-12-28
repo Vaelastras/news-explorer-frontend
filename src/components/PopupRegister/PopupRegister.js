@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './popupRegister.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
@@ -6,11 +6,17 @@ import Validator from '../../utils/Validator';
 function PopupRegister(props) {
   const { isOpen, onClose, onSwitchPopup } = props;
   const {
-    values, handleChange, errors, isValid,
+    values, handleChange, errors, isValid, resetForm,
   } = Validator();
+
+  useEffect(() => {
+    resetForm();
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    // eslint-disable-next-line no-console
+    console.log('Register Success'); // потом уберу
   }
 
   return (
@@ -28,7 +34,7 @@ function PopupRegister(props) {
       <input
         value={values.email || ''}
         onChange={handleChange}
-        id="email"
+        id="email-register"
         className="popup__input popup__input_type_email"
         type="email"
         name="email"
@@ -44,7 +50,7 @@ function PopupRegister(props) {
         value={values.password || ''}
         onChange={handleChange}
         className="popup__input popup__input_type_password"
-        id="password"
+        id="password-register"
         type="password"
         name="password"
         placeholder="Введите пароль"
@@ -69,7 +75,7 @@ function PopupRegister(props) {
       />
       <span id="name-error-register" className="popup__error"> {errors.name || ''} </span>
       <span id="main-error-register" className="popup__error popup__error_type_register"> ТУТ ДОЛЖЕН БЫТЬ КАКОЙ REGISTER!</span>
-      <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Войти</button>
+      <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Зарегистрироваться</button>
     </PopupWithForm>
   );
 }
