@@ -17,5 +17,10 @@
   "rules": {
     "react/prop-types": 0,
     "max-len": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

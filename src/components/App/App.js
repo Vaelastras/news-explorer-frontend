@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import SearchForm from '../SearchForm/SearchForm';
-import './App.css';
+import './app.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Articles from '../Articles/Articles';
@@ -21,7 +21,6 @@ function App() {
   }
   // закрытие всех попапов
   function closeAllPopups() {
-    // setIsOpenConfirmPopup(false);
     setOpenRegisterPopup(false);
     setIsOpenLoginPopup(false);
   }
@@ -68,7 +67,7 @@ function App() {
     };
   }, []);
 
-  function topScrollPage() {
+  function scrollToTop() {
     if (window.pageYOffset > 0) {
       window.scroll(0, 0);
     }
@@ -98,19 +97,20 @@ function App() {
         </Route>
       </Switch>
       <Footer
-        topScrollPage={topScrollPage}
+        scrollToTop={scrollToTop}
       />
-
-      <PopupRegister
-        isOpen={openRegisterPopup}
-        onClose={closeAllPopups}
-        onSwitchPopup={handlePopupSwitcher}
-      />
-      <PopupLogin
-        isOpen={openLoginPopup}
-        onClose={closeAllPopups}
-        onSwitchPopup={handlePopupSwitcher}
-      />
+      <section className="popups">
+        <PopupRegister
+          isOpen={openRegisterPopup}
+          onClose={closeAllPopups}
+          onSwitchPopup={handlePopupSwitcher}
+        />
+        <PopupLogin
+          isOpen={openLoginPopup}
+          onClose={closeAllPopups}
+          onSwitchPopup={handlePopupSwitcher}
+        />
+      </section>
     </div>
   );
 }

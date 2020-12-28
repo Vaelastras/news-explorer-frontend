@@ -30,15 +30,15 @@
   display: block;
   width: 288px;
   height: 64px;
-  background: #fff;
-  border-radius: 80px;
-  border: none;
-  margin: 64px auto 0 auto;
+  margin: 64px auto 0;
   cursor: pointer;
   font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+  background: white;
+  border-radius: 80px;
+  border: none;
   color: #1a1b22;
   outline: none;
 }
@@ -47,7 +47,7 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-/*для красивого заголовочка :)*/
+/*для поджатия заголовка */
 @media screen and (max-width: 1231px) {
   .articles-list__title {
     margin: 0 calc((100% - (400px * 2 + 16px * 1))/2) 64px;
@@ -60,7 +60,6 @@
     font-size: 30px;
     line-height: 34px;
     padding-top: 40px;
-    /*margin: 0 0px 32px 40px;*/
     margin: 0 calc((100% - (224px * 3 + 8px * 2))/2) 48px
   }
 
@@ -71,7 +70,7 @@
   }
 }
 
-/*для красивого заголовочка :)*/
+/*для поджатия заголовка */
 @media screen and (max-width: 687px) {
   .articles-list__title {
     margin: 0 calc((100% - (224px * 2 + 8px * 1))/2) 48px;

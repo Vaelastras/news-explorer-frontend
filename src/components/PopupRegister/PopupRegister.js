@@ -11,7 +11,7 @@ function PopupRegister(props) {
 
   useEffect(() => {
     resetForm();
-  }, [isOpen]);
+  }, [isOpen]); // докрутить валидацию
 
   function handleSubmit(e) {
     e.preventDefault();

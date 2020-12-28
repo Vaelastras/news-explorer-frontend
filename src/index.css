@@ -1,14 +1,9 @@
 @import "./vendor/normalize.css";
 @import "./fonts/fonts.css";
 
-.root {
+.page {
   position: relative;
   max-width: 1440px;
   background-color: white;
   margin: 0 auto;
 }
-
-
-/*header, h1, h2, h3, p, div, nav, ul, li, form, input, button, img {*/
-/*  border: 1px tomato solid*/
-/*}*/
