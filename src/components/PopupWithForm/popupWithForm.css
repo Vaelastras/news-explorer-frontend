@@ -97,6 +97,10 @@
   outline: none;
 }
 
+.popup__input:focus {
+  border-bottom: 1px solid black;
+}
+
 .popup__error {
   width: 358px;
   height: auto;
