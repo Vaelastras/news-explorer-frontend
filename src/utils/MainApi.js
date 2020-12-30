@@ -82,7 +82,7 @@ export const deleteArticle = (articleId) => fetch(
   .catch((err) => Promise.reject(err.message));
 
 // сохранить карту в своем апи
-export const saveNews = (article, keyword) => {
+export const saveArticle = (article, keyword) => {
   const {
     owner,
     title,

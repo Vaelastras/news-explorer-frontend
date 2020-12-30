@@ -30,7 +30,7 @@ function Footer(props) {
             <a href="https://www.facebook.com/Vaelastras/" target="_blank" rel="noreferrer"><img className="footer__social-icon" src={facebook} alt='facebook'/></a>
           </li>
           <li className="footer__social-link">
-            <a href="vaelastras@gmail.com" target="_blank" rel="noreferrer"><img className="footer__social-icon" src={gmail} alt='mail me'/></a>
+            <a href="mailto:vaelastras@gmail.com" target="_blank" rel="noreferrer"><img className="footer__social-icon" src={gmail} alt='mail me'/></a>
           </li>
           <li className="footer__social-link">
             <a href="https://vk.com/vaelastras" target="_blank" rel="noreferrer"><img className ="footer__social-icon" src={vk} alt='vk'/></a>

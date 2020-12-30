@@ -11,10 +11,15 @@ import Footer from '../Footer/Footer';
 import PopupRegister from '../PopupRegister/PopupRegister';
 import PopupLogin from '../PopupLogin/PopupLogin';
 
+import CurrentUserContext from '../../context/CurrentUserContext';
+import scrollToTop from '../../utils/topScroll';
+
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
   const [openRegisterPopup, setOpenRegisterPopup] = useState(false);
   const [openLoginPopup, setIsOpenLoginPopup] = useState(false);
   const [burgerOpen, setBurgerOpen] = useState(false);
+
   // открытие бургерного меню
   function handleClickBurger() {
     setBurgerOpen(!burgerOpen);
@@ -67,50 +72,118 @@ function App() {
     };
   }, []);
 
-  function scrollToTop() {
-    if (window.pageYOffset > 0) {
-      window.scroll(0, 0);
-    }
-  }
-
   return (
     <div className='page'>
-      <Switch>
-        <Route exact path='/'>
-          <Header
-            isOpenBurgerMenu={burgerOpen}
-            isOpen={handleClickBurger}
-            isOpenLoginPopup={handleOpenLoginPopup}
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path='/'>
+            <Header
+              isOpenBurgerMenu={burgerOpen}
+              isOpen={handleClickBurger}
+              isOpenLoginPopup={handleOpenLoginPopup}
 
-          />
-          <SearchForm/>
-          <Main />
-        </Route>
-        <Route path='/saved-news'>
-          <Header
-            isOpenBurgerMenu={burgerOpen}
-            isOpen={handleClickBurger}
-            isOpenLoginPopup={handleOpenLoginPopup}
-          />
-          <Summary/>
-          <Articles/>
-        </Route>
-      </Switch>
-      <Footer
-        scrollToTop={scrollToTop}
-      />
-      <section className="popups">
-        <PopupRegister
-          isOpen={openRegisterPopup}
-          onClose={closeAllPopups}
-          onSwitchPopup={handlePopupSwitcher}
+            />
+            <SearchForm/>
+            <Main />
+          </Route>
+          <Route path='/saved-news'>
+            <Header
+              isOpenBurgerMenu={burgerOpen}
+              isOpen={handleClickBurger}
+              isOpenLoginPopup={handleOpenLoginPopup}
+            />
+            <Summary/>
+            <Articles/>
+          </Route>
+        </Switch>
+        <Footer
+          scrollToTop={scrollToTop}
         />
-        <PopupLogin
-          isOpen={openLoginPopup}
-          onClose={closeAllPopups}
-          onSwitchPopup={handlePopupSwitcher}
+        <section className="popups">
+          <PopupRegister
+            isOpen={openRegisterPopup}
+            onClose={closeAllPopups}
+            onSwitchPopup={handlePopupSwitcher}
+          />
+          <PopupLogin
+            isOpen={openLoginPopup}
+            onClose={closeAllPopups}
+            onSwitchPopup={handlePopupSwitcher}
+          />
+        </section>
+        <Switch>
+          <Route exact path='/'>
+            <Header
+              isOpenBurgerMenu={burgerOpen}
+              isOpen={handleClickBurger}
+              isOpenLoginPopup={handleOpenLoginPopup}
+
+            />
+            <SearchForm/>
+            <Main />
+          </Route>
+          <Route path='/saved-news'>
+            <Header
+              isOpenBurgerMenu={burgerOpen}
+              isOpen={handleClickBurger}
+              isOpenLoginPopup={handleOpenLoginPopup}
+            />
+            <Summary/>
+            <Articles/>
+          </Route>
+        </Switch>
+        <Footer
+          scrollToTop={scrollToTop}
         />
-      </section>
+        <section className="popups">
+          <PopupRegister
+            isOpen={openRegisterPopup}
+            onClose={closeAllPopups}
+            onSwitchPopup={handlePopupSwitcher}
+          />
+          <PopupLogin
+            isOpen={openLoginPopup}
+            onClose={closeAllPopups}
+            onSwitchPopup={handlePopupSwitcher}
+          />
+        </section>
+        <Switch>
+          <Route exact path='/'>
+            <Header
+              isOpenBurgerMenu={burgerOpen}
+              isOpen={handleClickBurger}
+              isOpenLoginPopup={handleOpenLoginPopup}
+
+            />
+            <SearchForm/>
+            <Main />
+          </Route>
+          <Route path='/saved-news'>
+            <Header
+              isOpenBurgerMenu={burgerOpen}
+              isOpen={handleClickBurger}
+              isOpenLoginPopup={handleOpenLoginPopup}
+            />
+            <Summary/>
+            <Articles/>
+          </Route>
+        </Switch>
+        <Footer
+          scrollToTop={scrollToTop}
+        />
+        <section className="popups">
+          <PopupRegister
+            isOpen={openRegisterPopup}
+            onClose={closeAllPopups}
+            onSwitchPopup={handlePopupSwitcher}
+          />
+          <PopupLogin
+            isOpen={openLoginPopup}
+            onClose={closeAllPopups}
+            onSwitchPopup={handlePopupSwitcher}
+          />
+        </section>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
