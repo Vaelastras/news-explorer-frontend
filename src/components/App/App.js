@@ -8,8 +8,9 @@ import Main from '../Main/Main';
 import Articles from '../Articles/Articles';
 import Summary from '../Summary/Summary';
 import Footer from '../Footer/Footer';
-import PopupRegister from '../PopupRegister/PopupRegister';
-import PopupLogin from '../PopupLogin/PopupLogin';
+
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
 import scrollToTop from '../../utils/topScroll';
@@ -100,12 +101,12 @@ function App() {
           scrollToTop={scrollToTop}
         />
         <section className="popups">
-          <PopupRegister
+          <Register
             isOpen={openRegisterPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
           />
-          <PopupLogin
+          <Login
             isOpen={openLoginPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
@@ -136,12 +137,12 @@ function App() {
           scrollToTop={scrollToTop}
         />
         <section className="popups">
-          <PopupRegister
+          <Register
             isOpen={openRegisterPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
           />
-          <PopupLogin
+          <Login
             isOpen={openLoginPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
@@ -172,12 +173,12 @@ function App() {
           scrollToTop={scrollToTop}
         />
         <section className="popups">
-          <PopupRegister
+          <Register
             isOpen={openRegisterPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
           />
-          <PopupLogin
+          <Login
             isOpen={openLoginPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}

@@ -31,7 +31,7 @@ function Navigation(props) {
         </ul>
         <button onClick={isOpenLoginPopup} className={navButtonLogin}>{buttonDisplayName}</button>
         <NavLink to="/" className="navigation__link">
-          <button className={navButtonLogout}>Вася <img className="navigation__icon-logout" alt="logout button" src={navButtonColor}/></button>
+          <button className={navButtonLogout}>{buttonDisplayName}<img className="navigation__icon-logout" alt="logout button" src={navButtonColor}/></button>
         </NavLink>
       </div>
     </nav>

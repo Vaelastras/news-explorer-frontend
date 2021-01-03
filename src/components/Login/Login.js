@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import './popupLogin.css';
+import './Login.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
-function PopupLogin(props) {
+function Login(props) {
   const {
     values,
     handleChange,
@@ -74,4 +74,4 @@ function PopupLogin(props) {
   );
 }
 
-export default PopupLogin;
+export default Login;

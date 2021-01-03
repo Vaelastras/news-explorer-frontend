@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import './popupRegister.css';
+import './Register.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
-function PopupRegister(props) {
+function Register(props) {
   const { isOpen, onClose, onSwitchPopup } = props;
   const {
     values, handleChange, errors, isValid, resetForm,
@@ -80,4 +80,4 @@ function PopupRegister(props) {
   );
 }
 
-export default PopupRegister;
+export default Register;
