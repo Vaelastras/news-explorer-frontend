@@ -16,8 +16,10 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 import scrollToTop from '../../utils/topScroll';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
-import * as auth from '../../utils/MainApi';
 import NoResult from '../NoResult/NoResult';
+
+import * as auth from '../../utils/MainApi';
+import * as newsApi from '../../utils/NewsApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); // авторизационный стейт
