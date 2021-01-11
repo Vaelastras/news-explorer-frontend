@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
-
-import SearchForm from '../SearchForm/SearchForm';
 import './app.css';
+
+// компоненты
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import SearchForm from '../SearchForm/SearchForm';
 import Articles from '../Articles/Articles';
 import Footer from '../Footer/Footer';
 
+// попапы
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PopupConfirm from '../PopupConfirm/PopupConfirm';
 
+// контекст и HOC
 import CurrentUserContext from '../../context/CurrentUserContext';
-import scrollToTop from '../../utils/topScroll';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
+// сервисные компоненты
 import Preloader from '../Preloader/Preloader';
 import NoResult from '../NoResult/NoResult';
 
+// апи и утилиты
 import * as auth from '../../utils/MainApi';
 import * as newsApi from '../../utils/NewsApi';
+import scrollToTop from '../../utils/topScroll';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); // авторизационный стейт
