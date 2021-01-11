@@ -11,10 +11,13 @@ function Login(props) {
     isValid,
     resetForm,
   } = Validator();
+
   const {
     isOpen,
     onClose,
     onSwitchPopup,
+    onLogin,
+    textError,
   } = props;
 
   useEffect(() => {
@@ -23,8 +26,7 @@ function Login(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log('Login success'); // потом уберу
+    onLogin(values.email, values.password);
   }
 
   return (
@@ -66,9 +68,7 @@ function Login(props) {
           required
         />
         <span id="password-error-login" className="popup__error" >{errors.password || ''}</span>
-
-        <span id="main-error-login" className="popup__error popup__error_type_login">ТУТ ДОЛЖЕН БЫТЬ КАКОЙ ТО ТЕКСТ ОШИБКИ LOGIN!</span>
-
+        <span id="main-error-login" className="popup__error popup__error_type_login">{textError}</span>
         <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Войти</button>
     </PopupWithForm>
   );

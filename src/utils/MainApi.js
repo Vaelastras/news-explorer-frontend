@@ -3,7 +3,7 @@ import newsDefaultImage from '../images/news-default.jpg';
 const baseAuthURL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
 
 // регистрация нового пользователя
-export const register = (email, password, name) => fetch(`${baseAuthURL}/signup`, {
+export const createUser = (email, password, name) => fetch(`${baseAuthURL}/signup`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, password }),
@@ -16,7 +16,7 @@ export const register = (email, password, name) => fetch(`${baseAuthURL}/signup`
   });
 
 // авторизация существующего пользователя
-export const authorize = (email, password) => fetch(`${baseAuthURL}/signin`, {
+export const authorizeUser = (email, password) => fetch(`${baseAuthURL}/signin`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email, password }),

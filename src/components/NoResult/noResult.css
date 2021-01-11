@@ -1,4 +1,8 @@
 .no-result {
+ display:none
+}
+
+.no-result_active {
   max-width: 1440px;
   display: flex;
   flex-direction: column;

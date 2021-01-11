@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import SearchForm from '../SearchForm/SearchForm';
 import './app.css';
@@ -10,19 +10,56 @@ import Footer from '../Footer/Footer';
 
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import PopupConfirm from '../PopupConfirm/PopupConfirm';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
 import scrollToTop from '../../utils/topScroll';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
+import * as auth from '../../utils/MainApi';
+import NoResult from '../NoResult/NoResult';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false); // авторизационный стейт
+  const [currentUser, setCurrentUser] = useState({}); // стейт данных по юзеру
+
+  // стейты показа компонентов в поиске статей
   const [openPreloader, setOpenPreloader] = useState(false);
+  const [openNoResults, setOpenNoResults] = useState(false);
+
+  // стейты открытия попапов
   const [openRegisterPopup, setOpenRegisterPopup] = useState(false);
-  const [openLoginPopup, setIsOpenLoginPopup] = useState(false);
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  const [openConfirmPopup, setOpenConfirmPopup] = useState(false);
   const [burgerOpen, setBurgerOpen] = useState(false);
+
+  // показ ошибок в попапе
+  const [showErrorInPopup, setShowErrorInPopup] = useState(''); // вывод ошибок регистрации в попапе
+  const [searchError, setSearchError] = useState(''); // вывод ошибок поиска в noResult
+
+  const history = useHistory();
+
+  // f проверки токена
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth.getContent(jwt)
+        .then((res) => {
+          if (res) {
+            setCurrentUser({
+              id: res.data._id,
+              name: res.data.name,
+            });
+            setLoggedIn(true);
+          }
+        });
+    }
+  }
+
+  // проверка наличия токена в localstorage
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
 
   // открытие бургерного меню
   function handleClickBurger() {
@@ -31,7 +68,8 @@ function App() {
   // закрытие всех попапов
   function closeAllPopups() {
     setOpenRegisterPopup(false);
-    setIsOpenLoginPopup(false);
+    setOpenLoginPopup(false);
+    setOpenConfirmPopup(false);
   }
 
   // открытие окна регистрации
@@ -40,7 +78,7 @@ function App() {
   }
   // открытие окна логина
   function handleOpenLoginPopup() {
-    setIsOpenLoginPopup(true);
+    setOpenLoginPopup(true);
   }
   // переключатель попапов
   function handlePopupSwitcher() {
@@ -76,6 +114,59 @@ function App() {
     };
   }, []);
 
+  // регистрация нового пользователя
+  // возьмем данные из инпутов и передадим методу регистрации
+  // 1 если регистрация успешна - то закрываем попап регистрации
+  // 2 показываем попап подтверждения
+  // 3 переадресовываем пользователя в рут
+  // если все плохо - то кидаем текст ошибки в стейт для отображения в попапе регистрации
+
+  function handleRegister(email, password, name) {
+    auth.createUser(email, password, name)
+      .then((res) => {
+        if (res) {
+          closeAllPopups();
+          setOpenConfirmPopup(true);
+          history.push('./');
+        }
+      })
+      .catch((err) => {
+        setShowErrorInPopup(err.message);
+      });
+  }
+
+  // авторизация пользователя
+  // 1 берем данные с инпутов и отдаем их в метод авторизации
+  // 2 если ответа сервера нет - то кидаем ошибку в попап входа
+  // 3 если ответ есть и он ок - то записываем токен в локалсторейдж
+  // 4 затем с токеном вытаскиваем сохраненный контент с базы
+  // 5 если контента нет - кидаем ошибку
+  // 6 если контент есть - то разботаниваем его и данные пользователя с записью в локалсторейдж
+  // 7 меняем стейт логина и закрываем попап авторизации с редиректом на рут
+
+  function handleLogin(email, password) {
+    auth.authorizeUser(email, password)
+      .then((res) => {
+        localStorage.setItem('jwt', res.token);
+        if (res) {
+          auth.getContent(res.token)
+            .then((data) => {
+              localStorage.setItem('jwt', JSON.stringify(data));
+              setCurrentUser(data);
+              setLoggedIn(true);
+              closeAllPopups();
+              history.push('./');
+            })
+            .catch((err) => {
+              console.warn(err.message);
+            });
+        }
+      })
+      .catch((err) => {
+        setShowErrorInPopup(err.message);
+      });
+  }
+
   return (
     <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
@@ -88,7 +179,12 @@ function App() {
             />
             <SearchForm/>
             <Preloader
-              isOpen={openPreloader}/>
+              isOpen={openPreloader}
+            />
+            <NoResult
+              isOpen={openNoResults}
+              searchError={searchError}
+            />
             <Main />
           </Route>
           <Route path='/saved-news'>
@@ -111,11 +207,19 @@ function App() {
             isOpen={openRegisterPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
+            onRegister={handleRegister}
+            textError={showErrorInPopup}
           />
           <Login
             isOpen={openLoginPopup}
             onClose={closeAllPopups}
             onSwitchPopup={handlePopupSwitcher}
+            onLogin={handleLogin}
+            textError={showErrorInPopup}
+          />
+          <PopupConfirm
+           isOpen={openConfirmPopup}
+           onClose={closeAllPopups}
           />
         </section>
       </CurrentUserContext.Provider>

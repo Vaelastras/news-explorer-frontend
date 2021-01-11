@@ -4,7 +4,10 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
 function Register(props) {
-  const { isOpen, onClose, onSwitchPopup } = props;
+  const {
+    isOpen, onClose, onSwitchPopup, onRegister, textError,
+  } = props;
+
   const {
     values, handleChange, errors, isValid, resetForm,
   } = Validator();
@@ -15,8 +18,8 @@ function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log('Register Success'); // потом уберу
+    onRegister(values.email, values.password, values.name);
+    console.log('Register Success');
   }
 
   return (
@@ -74,7 +77,7 @@ function Register(props) {
         required
       />
       <span id="name-error-register" className="popup__error"> {errors.name || ''} </span>
-      <span id="main-error-register" className="popup__error popup__error_type_register"> ТУТ ДОЛЖЕН БЫТЬ КАКОЙ REGISTER!</span>
+      <span id="main-error-register" className="popup__error popup__error_type_register">{textError}</span>
       <button className={`popup__submit ${isValid ? 'popup__submit_type_active' : ''}`} type="submit" disabled={!isValid}>Зарегистрироваться</button>
     </PopupWithForm>
   );
