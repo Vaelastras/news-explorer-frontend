@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import './burger.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import logoutButtonDark from '../../images/icons/logout-dark.png';
+import logoutButtonLight from '../../images/icons/logout-ligth.png';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 function Burger({
-  isOpen, isOpenBurgerMenu, isOpenLoginPopup, isLoggedIn,
+  isOpen, isOpenBurgerMenu, isOpenLoginPopup, isLoggedIn, isLogout,
 }) {
   const { pathname } = useLocation();
   const currentUser = useContext(CurrentUserContext);
@@ -17,7 +18,7 @@ function Burger({
   const crossButtonDark = `${pathname === '/saved-news' && isOpenBurgerMenu ? 'burger__button-cross_type_dark' : ''}`;
   const crossBurgerColorDark = `${pathname === '/saved-news' && !isOpenBurgerMenu ? 'burger__button_type_dark' : ''}`;
   const buttonSwitcher = isOpenBurgerMenu ? 'burger__button-cross' : 'burger__button';
-
+  const burgerButtonColor = `${pathname === '/' ? logoutButtonLight : logoutButtonDark}`;
   const buttonDisplayName = `${isLoggedIn ? `${currentUser.name}` : 'Авторизоваться'}`; // подключить контекст/стейт currentUser.name
 
   return (
@@ -29,12 +30,12 @@ function Burger({
         <div className="burger__container">
           <ul className="burger__roster">
             <li className="burger__roster-list"><NavLink exact to="/" className={textColorization}>Главная</NavLink></li>
-            <li className="burger__roster-list"><NavLink to="/saved-news" className={textColorization}>Сохранённые статьи</NavLink></li>
+            {isLoggedIn && <li className="burger__roster-list"><NavLink to="/saved-news" className={textColorization}>Сохранённые статьи</NavLink></li>}
           </ul>
 
-          <button className={buttonLogin} onClick={isOpenLoginPopup}>{buttonDisplayName}</button>
+          <button className={buttonLogin} onClick={isLoggedIn ? isLogout : isOpenLoginPopup}>{buttonDisplayName}{isLoggedIn && <img className="burger__icon-logout" alt="logout button" src={burgerButtonColor}/>}</button>
           <NavLink to="/" className={textColorization}>
-            <button className={buttonLogout}>{buttonDisplayName} <img className="burger__icon-logout" alt="logout button" src={logoutButtonDark}/> </button>
+            <button className={buttonLogout} onClick={isLogout}>{buttonDisplayName} {isLoggedIn && <img className="burger__icon-logout" alt="logout button" src={burgerButtonColor}/>}</button>
           </NavLink>
         </div>
       </div>

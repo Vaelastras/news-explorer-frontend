@@ -6,6 +6,10 @@
   background: #f5f6f7;
 }
 
+.articles-list_type_hidden {
+  display: none;
+}
+
 .articles-list__title {
   max-width: 712px;
   margin: 0 calc((100% - (400px * 3 + 16px * 2))/2) 64px;
@@ -45,6 +49,10 @@
 
 .articles-list__button:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+.articles-list__button_hidden {
+  display: none;
 }
 
 /*для поджатия заголовка */

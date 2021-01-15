@@ -6,14 +6,14 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 import logoutButtonLight from '../../images/icons/logout-ligth.png';
 import logoutButtonDark from '../../images/icons/logout-dark.png';
 
-function Navigation(props) {
+function Navigation({ isLoggedIn, isOpenLoginPopup, isLogout }) {
   const currentUser = useContext(CurrentUserContext);
-  const { isLoggedIn, isOpenLoginPopup } = props;
   const { pathname } = useLocation();
 
   const navLinkDark = `${pathname === '/saved-news' ? 'navigation__link_type_black' : ''}`;
   const navLinkActive = `${pathname === '/saved-news' ? 'navigation__link_type_active_dark' : 'navigation__link_type_active'}`;
   const navButtonLogin = `${pathname === '/' ? 'navigation__button' : 'navigation__button_type_hidden'}`;
+
   const navButtonLogout = `${pathname === '/saved-news' ? 'navigation__button navigation__button_type_logout' : 'navigation__button_type_hidden'}`;
   const navButtonColor = `${pathname === '/' ? logoutButtonLight : logoutButtonDark}`;
 
@@ -25,13 +25,13 @@ function Navigation(props) {
           <li className='navigation__item'>
             <NavLink exact to="/" className={`navigation__link ${navLinkDark}`} activeClassName={navLinkActive}>Главная</NavLink>
           </li>
-          <li className='navigation__item'>
+          {isLoggedIn && <li className='navigation__item'>
             <NavLink to="/saved-news" className={`navigation__link ${navLinkDark}`} activeClassName={navLinkActive}>Сохранённые статьи</NavLink>
-          </li>
+          </li>}
         </ul>
-        <button onClick={isOpenLoginPopup} className={navButtonLogin}>{buttonDisplayName}</button>
+        <button onClick={isLoggedIn ? isLogout : isOpenLoginPopup } className={navButtonLogin}>{buttonDisplayName}{isLoggedIn && <img className="navigation__icon-logout" alt="logout button" src={navButtonColor}/>}</button>
         <NavLink to="/" className="navigation__link">
-          <button className={navButtonLogout}>{buttonDisplayName}<img className="navigation__icon-logout" alt="logout button" src={navButtonColor}/></button>
+          <button className={navButtonLogout} onClick={isLogout}>{buttonDisplayName}{isLoggedIn && <img className="navigation__icon-logout" alt="logout button" src={navButtonColor}/>}</button>
         </NavLink>
       </div>
     </nav>

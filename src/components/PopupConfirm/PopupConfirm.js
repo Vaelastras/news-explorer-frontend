@@ -2,17 +2,17 @@ import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import './popupConfirm.css';
 
-function PopupConfirm(props) {
-  const { isOpen, onClose } = props;
+export default function PopupConfirm(props) {
+  const { isOpen, onClose, onLogin } = props;
 
   return (
     <PopupWithForm
-      isOpen = {isOpen}
-      onClose = {onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       name="register"
-      title="Регистрация"
-    />
+      title="Пользователь успешно зарегистрирован"
+    >
+    <span onClick={onLogin} type='button' className="popup__switcher popup__switcher_confirm">Войти</span>
+    </PopupWithForm>
   );
 }
-
-export default PopupConfirm;

@@ -1,7 +1,6 @@
-const apiKey = '8c43c8fd4f0c449e95267fecb55fb71b';
-const apiUrl = 'https://nomoreparties.co/news/v2/everything?';
+import { API_KEY, PROXY_URL } from './constants';
 
-export default function getArticlesFromServer(tag) {
+export default function getArticlesFromServer(keyword) {
   // определим объект даты
   const worldTime = new Date();
   // переведем в ISO === "2020-12-28T08:31:12.577Z" и обрежем до дня
@@ -12,8 +11,9 @@ export default function getArticlesFromServer(tag) {
   // переведем в ISO переведем в ISO === "2020-12-28T08:31:12.577Z" и обрежем до дня
   const searchAt = worldTime.toISOString().slice(0, 10);
 
+  // TODO: вернуть 100 запросов
   return (
-    fetch(`${apiUrl}q=${tag}&apiKey=${apiKey}&from=${searchAt}&to=${searchFrom}&sortBy=publishedAt&pageSize=100`, {
+    fetch(`${PROXY_URL}?q=${keyword}&apiKey=${API_KEY}&from=${searchAt}&to=${searchFrom}&sortBy=publishedAt&pageSize=20`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

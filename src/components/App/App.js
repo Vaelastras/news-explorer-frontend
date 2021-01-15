@@ -24,11 +24,11 @@ import NoResult from '../NoResult/NoResult';
 
 // апи и утилиты
 import * as auth from '../../utils/MainApi';
-import * as newsApi from '../../utils/NewsApi';
+import getArticlesFromServer from '../../utils/NewsApi';
 import scrollToTop from '../../utils/topScroll';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false); // авторизационный стейт
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // авторизационный стейт
   const [currentUser, setCurrentUser] = useState({}); // стейт данных по юзеру
 
   // стейты показа компонентов в поиске статей
@@ -43,31 +43,18 @@ function App() {
 
   // показ ошибок в попапе
   const [showErrorInPopup, setShowErrorInPopup] = useState(''); // вывод ошибок регистрации в попапе
-  const [searchError, setSearchError] = useState(''); // вывод ошибок поиска в noResult
+  const [searchError, setSearchError] = useState(null); // вывод ошибок поиска в noResult
+
+  // стейты данных с сервера newsApi
+  const [articles, setArticles] = useState([]);
+  const [keyword, setKeyword] = useState('');
+  const [mySavedArticles, setMySavedArticles] = useState([]);
 
   const history = useHistory();
 
-  // f проверки токена
-  function tokenCheck() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth.getContent(jwt)
-        .then((res) => {
-          if (res) {
-            setCurrentUser({
-              id: res.data._id,
-              name: res.data.name,
-            });
-            setLoggedIn(true);
-          }
-        });
-    }
-  }
-
-  // проверка наличия токена в localstorage
-  useEffect(() => {
-    tokenCheck();
-  }, [loggedIn]);
+  React.useEffect(() => {
+    setKeyword(localStorage.getItem('keyword'));
+  }, [keyword]);
 
   // открытие бургерного меню
   function handleClickBurger() {
@@ -82,10 +69,12 @@ function App() {
 
   // открытие окна регистрации
   function handleOpenRegisterPopup() {
+    setShowErrorInPopup(null);
     setOpenRegisterPopup(true);
   }
   // открытие окна логина
   function handleOpenLoginPopup() {
+    setShowErrorInPopup(null);
     setOpenLoginPopup(true);
   }
   // переключатель попапов
@@ -139,7 +128,7 @@ function App() {
         }
       })
       .catch((err) => {
-        setShowErrorInPopup(err.message);
+        setShowErrorInPopup(`Ошибка регистрации: ${err}`);
       });
   }
 
@@ -159,21 +148,146 @@ function App() {
         if (res) {
           auth.getContent(res.token)
             .then((data) => {
-              localStorage.setItem('jwt', JSON.stringify(data));
+              localStorage.setItem('user', JSON.stringify(data));
               setCurrentUser(data);
-              setLoggedIn(true);
+              setIsLoggedIn(true);
               closeAllPopups();
               history.push('./');
             })
             .catch((err) => {
-              console.warn(err.message);
+              setShowErrorInPopup(err.name);
             });
         }
       })
       .catch((err) => {
-        setShowErrorInPopup(err.message);
+        setShowErrorInPopup(err.name);
       });
   }
+
+  function handleLogout() {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setArticles([]);
+    history.push('/');
+  }
+
+  // запрос на поиск новостей
+  // создаем стейты где лежат карты и ключевое слово по которому искали
+  //
+  // 1. Показываем прелоудер +
+  // 2. Делаем запрос на сервер с тегом
+  // 3. Если ответа нет - то:
+  //    - показываем компонент NoResult (setOpenNoResults)
+  //    - показываем ошибку в компоненте NoResult (setSearchError)
+  // 4. Если ответ есть то :
+  //    - записываем в стейт список карт ([{}, {} ...])
+  //    - записываем в стейт тег по которому искали ('')
+  // 5. Если в стейте карт ничего не появилось: (длина массива = 0)
+  //    - показываем NoResult
+  // 6. В любом случае убираем прелоудер из отображения
+
+  // TODO: тут прилетают данные от сервера: записываю в локаль то, что лежит в объекте articles
+  function handleSearchNews(tag) {
+    setOpenPreloader(true);
+    getArticlesFromServer(tag)
+      .then((data) => {
+        localStorage.setItem('articles', JSON.stringify(data.articles));
+        localStorage.setItem('keyword', tag);
+        setArticles(data.articles);
+        setKeyword(tag);
+        if (data.articles.length === 0) {
+          setSearchError(true);
+        }
+      })
+      .catch((err) => {
+        setOpenNoResults(true);
+        setSearchError(err.message);
+      })
+      .finally(() => setOpenPreloader(false));
+  }
+
+  // получить сохранненные карты
+  function getSavedNews() {
+    auth.getAllArticles()
+      .then((data) => {
+        setMySavedArticles(data);
+        setKeyword(data.keyword);
+      })
+      .catch((err) => {
+        Promise.reject(new Error(`Error: ${err.message}`));
+      });
+  }
+
+  // сохрынить карту
+
+  function handleSaveNews(article, tag) {
+    console.log('1', isLoggedIn);
+    if (isLoggedIn) {
+      console.log('2', isLoggedIn);
+      auth.saveArticle(article, tag)
+        .then(() => {
+          getSavedNews();
+        })
+        .catch((err) => {
+          Promise.reject(new Error(`Error: ${err.message}`));
+        });
+    }
+  }
+
+  // удалить сохраненную карту
+  function handleDeleteSavedNews(articleId) {
+    auth.deleteArticle(articleId)
+      .then(() => {
+        const newMySavedArticlesArray = mySavedArticles.filter((i) => (i._id !== articleId._id));
+        setMySavedArticles(newMySavedArticlesArray);
+      })
+      .catch((err) => {
+        Promise.reject(new Error(`Error: ${err.message}`));
+      });
+  }
+
+  // определяем какая статья, и либо ее сохраняем, либо удаляем
+  function updateMySavedArticles(article, tag, myArticle) {
+    const mySavedArticle = mySavedArticles.find((i) => {
+      if (myArticle) {
+        return i.title === myArticle.title && i.text === myArticle.text;
+      }
+      if (article) {
+        return i.title === article.title && i.text === article.description;
+      }
+      return '';
+    });
+
+    if (mySavedArticle) {
+      handleDeleteSavedNews(mySavedArticle);
+    } else {
+      handleSaveNews(article, tag);
+    }
+  }
+
+  // f проверки токена
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      setIsLoggedIn(true);
+      getSavedNews();
+      auth.getContent(jwt)
+        .then((res) => {
+          if (res) {
+            setCurrentUser(JSON.parse(localStorage.getItem('user')));
+            setIsLoggedIn(true);
+          }
+        });
+    }
+  }
+
+  // проверка наличия токена в localstorage
+  useEffect(() => {
+    tokenCheck();
+  }, [isLoggedIn]);
+
+  // console.log('mySavedArticles', mySavedArticles);
+  // console.log('articles', articles);
 
   return (
     <div className='page'>
@@ -184,8 +298,12 @@ function App() {
               isOpenBurgerMenu={burgerOpen}
               isOpen={handleClickBurger}
               isOpenLoginPopup={handleOpenLoginPopup}
+              isLogout={handleLogout}
+              isLoggedIn={isLoggedIn}
             />
-            <SearchForm/>
+            <SearchForm
+              handleNewsSearch={handleSearchNews}
+            />
             <Preloader
               isOpen={openPreloader}
             />
@@ -193,17 +311,31 @@ function App() {
               isOpen={openNoResults}
               searchError={searchError}
             />
-            <Main />
+            <Main
+              articles={articles}
+              mySavedArticles={mySavedArticles}
+              keyword={keyword}
+              isLoggedIn={isLoggedIn}
+              handleOpenLoginPopup={handleOpenLoginPopup}
+              updateMySavedArticles={updateMySavedArticles}
+            />
           </Route>
           <Route path='/saved-news'>
             <Header
               isOpenBurgerMenu={burgerOpen}
               isOpen={handleClickBurger}
               isOpenLoginPopup={handleOpenLoginPopup}
+              isLogout={handleLogout}
+              isLoggedIn={isLoggedIn}
             />
             <ProtectedRoute path='/saved-news'
-              loggedIn={loggedIn}
               component={Articles}
+              loggedIn={isLoggedIn}
+              handleOpenLoginPopup={handleOpenLoginPopup}
+              handleDeleteSavedNews={handleDeleteSavedNews}
+              updateMySavedArticles={updateMySavedArticles}
+              mySavedArticles={mySavedArticles}
+              keyword={keyword}
             />
           </Route>
         </Switch>
@@ -228,6 +360,7 @@ function App() {
           <PopupConfirm
            isOpen={openConfirmPopup}
            onClose={closeAllPopups}
+           onLogin={handleLogin}
           />
         </section>
       </CurrentUserContext.Provider>

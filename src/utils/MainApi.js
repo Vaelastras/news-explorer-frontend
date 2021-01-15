@@ -1,9 +1,8 @@
 import newsDefaultImage from '../images/news-default.jpg';
-
-const baseAuthURL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
+import { BASE_URL } from './constants';
 
 // регистрация нового пользователя
-export const createUser = (email, password, name) => fetch(`${baseAuthURL}/signup`, {
+export const createUser = (email, password, name) => fetch(`${BASE_URL}/signup`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, password }),
@@ -16,7 +15,7 @@ export const createUser = (email, password, name) => fetch(`${baseAuthURL}/signu
   });
 
 // авторизация существующего пользователя
-export const authorizeUser = (email, password) => fetch(`${baseAuthURL}/signin`, {
+export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email, password }),
@@ -25,7 +24,10 @@ export const authorizeUser = (email, password) => fetch(`${baseAuthURL}/signin`,
     if (res.ok) {
       return res.json();
     }
-    return '';
+    if (res.status === 401) {
+      return Promise.reject(new Error(`Error: ${res.status}`));
+    }
+    return Promise.reject(new Error('Oops Internal Server Error. Sorry 😞'));
   })
   .then((data) => {
     if (data.token) {
@@ -37,7 +39,7 @@ export const authorizeUser = (email, password) => fetch(`${baseAuthURL}/signin`,
   .catch((err) => Promise.reject(err.message));
 
 // проверка токена
-export const getContent = (token) => fetch(`${baseAuthURL}/users/me`, {
+export const getContent = (token) => fetch(`${BASE_URL}/users/me`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -51,11 +53,11 @@ export const getContent = (token) => fetch(`${baseAuthURL}/users/me`, {
     return '';
   })
   .then((data) => data)
-  .catch((err) => Promise.reject(err.message));
+  .catch((err) => Promise.reject(new Error(`Error: ${err}`)));
 
 /// получение серверных карточек
 export const getAllArticles = () => fetch(
-  `${baseAuthURL}/articles`,
+  `${BASE_URL}/articles`,
   {
     method: 'GET',
     headers: {
@@ -69,7 +71,7 @@ export const getAllArticles = () => fetch(
 
 // удаление серверной карточки
 export const deleteArticle = (articleId) => fetch(
-  `${baseAuthURL}/articles/${articleId}`,
+  `${BASE_URL}/articles/${articleId}`,
   {
     method: 'DELETE',
     headers: {
@@ -84,7 +86,6 @@ export const deleteArticle = (articleId) => fetch(
 // сохранить карту в своем апи
 export const saveArticle = (article, keyword) => {
   const {
-    owner,
     title,
     description,
     publishedAt,
@@ -93,7 +94,7 @@ export const saveArticle = (article, keyword) => {
     urlToImage,
   } = article;
   return fetch(
-    `${baseAuthURL}/articles`,
+    `${BASE_URL}/articles`,
     {
       method: 'POST',
       headers: {
@@ -101,7 +102,6 @@ export const saveArticle = (article, keyword) => {
         Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({
-        owner,
         keyword,
         title,
         text: description || title,

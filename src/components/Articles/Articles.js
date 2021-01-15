@@ -3,18 +3,54 @@
 import React from 'react';
 import './articles.css';
 import Article from '../Article/Article';
-import sampleCards from '../../utils/sampleCards';
 import Summary from '../Summary/Summary';
 
-function Articles() {
+function Articles({
+  isLoggedIn,
+  handleOpenLoginPopup,
+  handleDeleteSavedNews,
+  updateMySavedArticles,
+  mySavedArticles,
+  // keyword,
+}) {
   return (
-    <section className="articles">
+    <>
       <Summary />
-      {
-        sampleCards.map((card, i) => <Article description={card} key={i}/>)
+      {mySavedArticles.length > 0 && <section className="articles">
+          {
+            mySavedArticles.map((article, i) => <Article
+              article={article}
+              key={i + article.url}
+              keyword={article.keyword}
+              isLoggedIn={isLoggedIn}
+              handleOpenLoginPopup={handleOpenLoginPopup}
+              handleDeleteSavedNews={handleDeleteSavedNews}
+              updateMySavedArticles={updateMySavedArticles}
+              mySavedArticles={mySavedArticles}
+            />)
+          }
+        </section>
+
       }
-    </section>
+    </>
   );
 }
 
 export default Articles;
+
+// mySavedArticles.map((article, i) => <Article
+//               article={article}
+//               key={i + article.url}
+//               title={article.title}
+//               date={article.publishedAt}
+//               image={article.urlToImage}
+//               link={article.url}
+//               description={article.description}
+//               source={article.source.name}
+//               keyword={article.keyword || keyword}
+//               isLoggedIn={isLoggedIn}
+//               handleOpenLoginPopup={handleOpenLoginPopup}
+//               handleDeleteSavedNews={handleDeleteSavedNews}
+//               updateMySavedArticles={updateMySavedArticles}
+//               mySavedArticles={mySavedArticles}
+//             />)

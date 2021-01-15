@@ -13,4 +13,3 @@ function Preloader({ isOpen }) {
 }
 
 export default Preloader;
-

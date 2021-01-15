@@ -19,7 +19,6 @@ function Register(props) {
   function handleSubmit(e) {
     e.preventDefault();
     onRegister(values.email, values.password, values.name);
-    console.log('Register Success');
   }
 
   return (

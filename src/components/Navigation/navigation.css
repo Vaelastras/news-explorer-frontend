@@ -25,6 +25,10 @@
 	text-decoration: none;
 }
 
+.navigation__link_hidden {
+	display: none;
+}
+
 .navigation__link_type_black {
 	color: #1A1B22;
 }

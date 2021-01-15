@@ -5,7 +5,7 @@ import Navigation from '../Navigation/Navigation';
 import Burger from '../Burger/Burger';
 
 function Header({
-  isOpen, isOpenBurgerMenu, isOpenLoginPopup, isLoggedIn,
+  isOpen, isOpenBurgerMenu, isOpenLoginPopup, isLoggedIn, isLogout,
 }) {
   const { pathname } = useLocation();
 
@@ -20,12 +20,15 @@ function Header({
       <Link to='/' className={`header__logo ${headerLogoDark}`}>News Explorer</Link>
       <Navigation
         isOpenLoginPopup={isOpenLoginPopup}
+        isLogout={isLogout}
+        isLoggedIn={isLoggedIn}
       />
       <Burger
         isOpen={isOpen}
         isOpenBurgerMenu={isOpenBurgerMenu}
         isOpenLoginPopup={isOpenLoginPopup}
         isLoggedIn={isLoggedIn}
+        isLogout={isLogout}
         />
     </div>
    </header>

@@ -6,7 +6,7 @@
 	position: relative;
 }
 
-.article__tag {
+.article__keyword {
 	width: 88px;
 	height: 40px;
 	display: none;
@@ -23,7 +23,7 @@
 	color: black;
 }
 
-.article__tag_active {
+.article__keyword_active {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -94,7 +94,11 @@
 	cursor: pointer;
 }
 
-.article__bookmark:hover::before {
+.article__bookmark_type_marked {
+	background: #fff url('../../images/icons/bookmark-marked.png') no-repeat center;
+}
+
+.article__bookmark_type_inactive:hover::before {
 	content: 'Войдите, чтобы сохранять статьи';
 	width: 182px;
 	height: 40px;
@@ -139,6 +143,10 @@
 	line-height: 30px;
 	color: #1a1b22;
 	margin: 12px 0 0;
+	hyphens:auto;
+	-moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 .article__content {
@@ -150,6 +158,11 @@
 	line-height: 22px;
 	color: #1a1b22;
 	margin: 16px 0 0;
+	/* overflow: hidden; */
+	hyphens:auto;
+	-moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 .article__source {
@@ -185,7 +198,7 @@
 		right: 8px;
 	}
 
-	.article__tag {
+	.article__keyword {
 		top: 8px;
 		left: 8px;
 	}
@@ -215,7 +228,7 @@
 	}
 }
 
-@media screen and	(max-width: 550px) {
+@media screen and (max-width: 550px) {
 	.article {
 		width: 288px;
 	}
@@ -236,7 +249,7 @@
 		right: 16px;
 	}
 
-	.article__tag {
+	.article__keyword {
 		top: 16px;
 		left: 16px;
 	}
@@ -247,7 +260,7 @@
 	}
 
 	.article__image {
-		width: auto;
+		width: 100%;
 		height: 196px;
 	}
 
