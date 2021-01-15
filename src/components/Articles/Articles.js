@@ -18,10 +18,16 @@ function Articles({
       <Summary />
       {mySavedArticles.length > 0 && <section className="articles">
           {
-            mySavedArticles.map((article, i) => <Article
+            mySavedArticles.map((article, index) => <Article
               article={article}
-              key={i + article.url}
+              key={index || article.id + article.url + Math.floor(Math.random())}
               keyword={article.keyword}
+              title={article.title}
+              date={article.publishedAt}
+              image={article.urlToImage}
+              link={article.url}
+              description={article.description}
+              source={article.source.name}
               isLoggedIn={isLoggedIn}
               handleOpenLoginPopup={handleOpenLoginPopup}
               handleDeleteSavedNews={handleDeleteSavedNews}

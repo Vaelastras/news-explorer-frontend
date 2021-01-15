@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import newsDefaultImage from '../../images/news-default.jpg';
 
 function Article({
-  article, isLoggedIn, handleOpenLoginPopup, updateMySavedArticles, mySavedArticles, keyword,
+  article, isLoggedIn, handleOpenLoginPopup, updateMySavedArticles, mySavedArticles, keyword, ...props
 }) {
   // const [savedArticle, setSavedArticle] = useState(false);
   const { pathname } = useLocation();
@@ -64,13 +64,11 @@ function Article({
           <button onClick={handleOpenLoginPopup} className="article__bookmark article__bookmark_type_inactive"/>
           )
       }
-
-      {/* <button onClick={isLoggedIn ? buttonClick : handleOpenLoginPopup} className={buttonSwitcher}/> */}
-      <img className="article__image" src={article.image || newsDefaultImage} alt={article.title}/>
-      <a className="article__link" href={article.link} target="_blank" rel="noreferrer">
-        <p className="article__date">{handleDateFormatter(article.date)}</p>
+      <img className="article__image" src={props.image || article.image || newsDefaultImage} alt={article.title}/>
+      <a className="article__link" href={props.link} target="_blank" rel="noreferrer">
+        <p className="article__date">{handleDateFormatter(props.date || article.date)}</p>
         <div className="article__wrapper">
-          <h3 className="article__title"> {article.title}
+          <h3 className="article__title"> {props.title}
             {/* {
             (currentResolution <= 900 && props.title.length > 29) || (props.title.length > 40)
               ? `${props.title.substring(0, 40)}...`
@@ -83,10 +81,10 @@ function Article({
               ? `${props.description.substring(0, 70)}...`
               : props.description || props.title
           } */}
-          {article.description}
+          {props.description || article.text}
           </p>
         </div>
-        <p className="article__source">{article.source}</p>
+        <p className="article__source">{props.source || article.source.name }</p>
       </a>
     </article>
   );

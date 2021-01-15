@@ -41,9 +41,9 @@ function ArticlesList({
       <h2 className="articles-list__title">Результаты поиска</h2>
       <div className="articles-list__wrapper">
         {
-          renderArticles.map((article, i) => <Article
+          renderArticles.map((article, index) => <Article
               article={article}
-              key={i}
+              key={index + article.url}
               keyword={keyword}
               title={article.title}
               date={article.publishedAt}
