@@ -44,12 +44,13 @@
 
 .search__input {
   width: 100%;
+  height: 24px;
+  place-self: center;
   margin-left: 24px;
   font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
-  border-radius: 100px;
   color: #1A1B22;
   border: none;
   outline: none;
@@ -57,7 +58,7 @@
 }
 
 .search__input:focus {
-  outline: #2f71e5;
+  font-style: italic;
 }
 
 .search__button {

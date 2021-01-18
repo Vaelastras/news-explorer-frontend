@@ -23,7 +23,7 @@ import Preloader from '../Preloader/Preloader';
 import NoResult from '../NoResult/NoResult';
 
 // апи и утилиты
-import * as auth from '../../utils/MainApi';
+import * as mainApi from '../../utils/MainApi';
 import getArticlesFromServer from '../../utils/NewsApi';
 import scrollToTop from '../../utils/topScroll';
 
@@ -43,7 +43,7 @@ function App() {
 
   // показ ошибок в попапе
   const [showErrorInPopup, setShowErrorInPopup] = useState(''); // вывод ошибок регистрации в попапе
-  const [searchError, setSearchError] = useState(null); // вывод ошибок поиска в noResult
+  const [searchError, setSearchError] = useState(false); // вывод ошибок поиска в noResult
 
   // стейты данных с сервера newsApi
   const [articles, setArticles] = useState([]);
@@ -60,6 +60,7 @@ function App() {
   function handleClickBurger() {
     setBurgerOpen(!burgerOpen);
   }
+
   // закрытие всех попапов
   function closeAllPopups() {
     setOpenRegisterPopup(false);
@@ -72,11 +73,13 @@ function App() {
     setShowErrorInPopup(null);
     setOpenRegisterPopup(true);
   }
+
   // открытие окна логина
   function handleOpenLoginPopup() {
     setShowErrorInPopup(null);
     setOpenLoginPopup(true);
   }
+
   // переключатель попапов
   function handlePopupSwitcher() {
     if (openRegisterPopup) {
@@ -111,15 +114,8 @@ function App() {
     };
   }, []);
 
-  // регистрация нового пользователя
-  // возьмем данные из инпутов и передадим методу регистрации
-  // 1 если регистрация успешна - то закрываем попап регистрации
-  // 2 показываем попап подтверждения
-  // 3 переадресовываем пользователя в рут
-  // если все плохо - то кидаем текст ошибки в стейт для отображения в попапе регистрации
-
   function handleRegister(email, password, name) {
-    auth.createUser(email, password, name)
+    mainApi.createUser(email, password, name)
       .then((res) => {
         if (res) {
           closeAllPopups();
@@ -127,40 +123,44 @@ function App() {
           history.push('./');
         }
       })
-      .catch((err) => {
-        setShowErrorInPopup(`Ошибка регистрации: ${err}`);
+      .catch((errCode) => {
+        if (errCode === 409) {
+          return setShowErrorInPopup('Email уже регистрировался');
+        }
+        if (errCode === 429) {
+          return setShowErrorInPopup('Превышено количество запросов');
+        }
+        return '';
       });
   }
 
-  // авторизация пользователя
-  // 1 берем данные с инпутов и отдаем их в метод авторизации
-  // 2 если ответа сервера нет - то кидаем ошибку в попап входа
-  // 3 если ответ есть и он ок - то записываем токен в локалсторейдж
-  // 4 затем с токеном вытаскиваем сохраненный контент с базы
-  // 5 если контента нет - кидаем ошибку
-  // 6 если контент есть - то разботаниваем его и данные пользователя с записью в локалсторейдж
-  // 7 меняем стейт логина и закрываем попап авторизации с редиректом на рут
-
   function handleLogin(email, password) {
-    auth.authorizeUser(email, password)
+    mainApi.authorizeUser(email, password)
       .then((res) => {
         localStorage.setItem('jwt', res.token);
         if (res) {
-          auth.getContent(res.token)
-            .then((data) => {
-              localStorage.setItem('user', JSON.stringify(data));
-              setCurrentUser(data);
+          mainApi.getContent(res.token)
+            .then((user) => {
+              localStorage.setItem('user', JSON.stringify(user));
+              setCurrentUser(user);
               setIsLoggedIn(true);
               closeAllPopups();
               history.push('./');
             })
             .catch((err) => {
-              setShowErrorInPopup(err.name);
+              setShowErrorInPopup(`${err}`);
+              console.log(err.message);
             });
         }
       })
       .catch((err) => {
-        setShowErrorInPopup(err.name);
+        if (err.status === 401) {
+          return setShowErrorInPopup('Неправильный логин или пароль');
+        }
+        if (err.status === 400) {
+          return setShowErrorInPopup('User is not defined. Please register!');
+        }
+        return setShowErrorInPopup('Service unavailable, try again later');
       });
   }
 
@@ -171,23 +171,8 @@ function App() {
     history.push('/');
   }
 
-  // запрос на поиск новостей
-  // создаем стейты где лежат карты и ключевое слово по которому искали
-  //
-  // 1. Показываем прелоудер +
-  // 2. Делаем запрос на сервер с тегом
-  // 3. Если ответа нет - то:
-  //    - показываем компонент NoResult (setOpenNoResults)
-  //    - показываем ошибку в компоненте NoResult (setSearchError)
-  // 4. Если ответ есть то :
-  //    - записываем в стейт список карт ([{}, {} ...])
-  //    - записываем в стейт тег по которому искали ('')
-  // 5. Если в стейте карт ничего не появилось: (длина массива = 0)
-  //    - показываем NoResult
-  // 6. В любом случае убираем прелоудер из отображения
-
-  // TODO: тут прилетают данные от сервера: записываю в локаль то, что лежит в объекте articles
   function handleSearchNews(tag) {
+    setOpenNoResults(false);
     setOpenPreloader(true);
     getArticlesFromServer(tag)
       .then((data) => {
@@ -196,7 +181,8 @@ function App() {
         setArticles(data.articles);
         setKeyword(tag);
         if (data.articles.length === 0) {
-          setSearchError(true);
+          setSearchError(false);
+          setOpenNoResults(true);
         }
       })
       .catch((err) => {
@@ -208,46 +194,37 @@ function App() {
 
   // получить сохранненные карты
   function getSavedNews() {
-    auth.getAllArticles()
+    mainApi.getAllArticles()
       .then((data) => {
         setMySavedArticles(data);
         setKeyword(data.keyword);
-      })
-      .catch((err) => {
-        Promise.reject(new Error(`Error: ${err.message}`));
       });
   }
 
-  // сохрынить карту
-
   function handleSaveNews(article, tag) {
-    console.log('1', isLoggedIn);
     if (isLoggedIn) {
-      console.log('2', isLoggedIn);
-      auth.saveArticle(article, tag)
+      mainApi.saveArticle(article, tag)
         .then(() => {
           getSavedNews();
-        })
-        .catch((err) => {
-          Promise.reject(new Error(`Error: ${err.message}`));
         });
     }
   }
 
-  // удалить сохраненную карту
-  function handleDeleteSavedNews(articleId) {
-    auth.deleteArticle(articleId)
+  function handleDeleteSavedNews(article) {
+    mainApi.deleteArticle(article)
       .then(() => {
-        const newMySavedArticlesArray = mySavedArticles.filter((i) => (i._id !== articleId._id));
-        setMySavedArticles(newMySavedArticlesArray);
+        const myArticleArray = mySavedArticles.filter((i) => (i._id !== article._id));
+        setMySavedArticles(myArticleArray);
       })
       .catch((err) => {
-        Promise.reject(new Error(`Error: ${err.message}`));
+        console.log(err.message);
       });
   }
 
   // определяем какая статья, и либо ее сохраняем, либо удаляем
+
   function updateMySavedArticles(article, tag, myArticle) {
+    // eslint-disable-next-line consistent-return,array-callback-return
     const mySavedArticle = mySavedArticles.find((i) => {
       if (myArticle) {
         return i.title === myArticle.title && i.text === myArticle.text;
@@ -255,7 +232,6 @@ function App() {
       if (article) {
         return i.title === article.title && i.text === article.description;
       }
-      return '';
     });
 
     if (mySavedArticle) {
@@ -271,7 +247,7 @@ function App() {
     if (jwt) {
       setIsLoggedIn(true);
       getSavedNews();
-      auth.getContent(jwt)
+      mainApi.getContent(jwt)
         .then((res) => {
           if (res) {
             setCurrentUser(JSON.parse(localStorage.getItem('user')));
@@ -285,9 +261,6 @@ function App() {
   useEffect(() => {
     tokenCheck();
   }, [isLoggedIn]);
-
-  // console.log('mySavedArticles', mySavedArticles);
-  // console.log('articles', articles);
 
   return (
     <div className='page'>
@@ -330,9 +303,8 @@ function App() {
             />
             <ProtectedRoute path='/saved-news'
               component={Articles}
-              loggedIn={isLoggedIn}
+              isLoggedIn={isLoggedIn}
               handleOpenLoginPopup={handleOpenLoginPopup}
-              handleDeleteSavedNews={handleDeleteSavedNews}
               updateMySavedArticles={updateMySavedArticles}
               mySavedArticles={mySavedArticles}
               keyword={keyword}

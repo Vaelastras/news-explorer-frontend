@@ -24,19 +24,15 @@ export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
     if (res.ok) {
       return res.json();
     }
-    if (res.status === 401) {
-      return Promise.reject(new Error(`Error: ${res.status}`));
-    }
-    return Promise.reject(new Error('Oops Internal Server Error. Sorry 😞'));
+    return Promise.reject(res);
   })
+  // eslint-disable-next-line consistent-return
   .then((data) => {
     if (data.token) {
       localStorage.setItem('jwt', data.token);
       return data;
     }
-    return '';
-  })
-  .catch((err) => Promise.reject(err.message));
+  });
 
 // проверка токена
 export const getContent = (token) => fetch(`${BASE_URL}/users/me`, {
@@ -71,7 +67,7 @@ export const getAllArticles = () => fetch(
 
 // удаление серверной карточки
 export const deleteArticle = (articleId) => fetch(
-  `${BASE_URL}/articles/${articleId}`,
+  `${BASE_URL}/articles/${articleId._id}`,
   {
     method: 'DELETE',
     headers: {
@@ -79,8 +75,7 @@ export const deleteArticle = (articleId) => fetch(
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   },
-)
-  .then((res) => res.json())
+).then((res) => res.json())
   .catch((err) => Promise.reject(err.message));
 
 // сохранить карту в своем апи

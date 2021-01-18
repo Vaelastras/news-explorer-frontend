@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './articles-list.css';
 import Article from '../Article/Article';
+import CARDS_TO_SHOW from '../../utils/constants';
 
 function ArticlesList({
-  articles, keyword, isLoggedIn, handleOpenLoginPopup, updateMySavedArticles,
+  articles, keyword, isLoggedIn, handleOpenLoginPopup, updateMySavedArticles, mySavedArticles,
 }) {
 // Функционал кнопки "Показать еще"
   // 1. Создать стейт отрисовки где будут лежать все карты из артиклов
@@ -15,14 +16,14 @@ function ArticlesList({
   //  все это будет зависеть от списка статей в глобальном стейте - если изменяется исходный массив - выполнить заново
 
   const [renderArticles, setRenderArticles] = useState([]);
-  const [buttonState, setButtonState] = useState(true);
+  const [buttonHidded, setButtonHidden] = useState(true);
 
   useEffect(() => {
-    setRenderArticles(articles.slice(0, 3));
-    if (articles.length <= 3) {
-      setButtonState(false);
+    setRenderArticles(articles.slice(0, CARDS_TO_SHOW));
+    if (articles.length <= CARDS_TO_SHOW) {
+      setButtonHidden(false);
     } else {
-      setButtonState(true);
+      setButtonHidden(true);
     }
   }, [articles]);
 
@@ -30,9 +31,9 @@ function ArticlesList({
   // отрезать по +3 карты
   // повторить пока длина массива рендера не будет >= 3 чем начальный массив - тогда спрячем кнопку
   function showMoreArticles() {
-    setRenderArticles(articles.slice(0, renderArticles.length + 3));
-    if (renderArticles.length >= articles.length - 3) {
-      setButtonState(false);
+    setRenderArticles(articles.slice(0, renderArticles.length + CARDS_TO_SHOW));
+    if (renderArticles.length >= articles.length - CARDS_TO_SHOW) {
+      setButtonHidden(false);
     }
   }
 
@@ -41,9 +42,9 @@ function ArticlesList({
       <h2 className="articles-list__title">Результаты поиска</h2>
       <div className="articles-list__wrapper">
         {
-          renderArticles.map((article, index) => <Article
+          renderArticles.map((article) => <Article
               article={article}
-              key={index + article.url}
+              key={article.url + Math.random()}
               keyword={keyword}
               title={article.title}
               date={article.publishedAt}
@@ -52,12 +53,13 @@ function ArticlesList({
               description={article.description}
               source={article.source.name}
               isLoggedIn={isLoggedIn}
+              mySavedArticles={mySavedArticles}
               handleOpenLoginPopup={handleOpenLoginPopup}
               updateMySavedArticles={updateMySavedArticles}
             />)
         }
       </div>
-      {articles.length > 3 && <button onClick={showMoreArticles} className={buttonState ? 'articles-list__button' : 'articles-list__button_hidden'}>Показать еще</button>}
+      {articles.length > 3 && <button onClick={showMoreArticles} className={buttonHidded ? 'articles-list__button' : 'articles-list__button_hidden'}>Показать еще</button>}
     </section>
   );
 }

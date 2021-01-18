@@ -43,6 +43,7 @@ function Register(props) {
         placeholder="Введите почту"
         minLength="5"
         maxLength="30"
+        // autoСomplete="on"
         required
       />
       <span id="email-register-error" className="popup__error" >{errors.email || ''}</span>
@@ -58,6 +59,7 @@ function Register(props) {
         placeholder="Введите пароль"
         minLength="5"
         maxLength="30"
+        // autoСomplete="on"
         required
       />
       <span id="password-error-register" className="popup__error" >{errors.password || ''}</span>
@@ -73,6 +75,7 @@ function Register(props) {
         placeholder="Введите своё имя"
         minLength="2"
         maxLength="30"
+        // autoСomplete="on"
         required
       />
       <span id="name-error-register" className="popup__error"> {errors.name || ''} </span>

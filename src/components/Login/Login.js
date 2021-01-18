@@ -3,7 +3,9 @@ import './Login.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
-function Login(props) {
+function Login({
+  isOpen, onClose, onSwitchPopup, onLogin, textError,
+}) {
   const {
     values,
     handleChange,
@@ -11,14 +13,6 @@ function Login(props) {
     isValid,
     resetForm,
   } = Validator();
-
-  const {
-    isOpen,
-    onClose,
-    onSwitchPopup,
-    onLogin,
-    textError,
-  } = props;
 
   useEffect(() => {
     resetForm();
@@ -50,6 +44,7 @@ function Login(props) {
           placeholder="Введите почту"
           minLength="5"
           maxLength="30"
+          autoComplete="on"
           required
         />
         <span id="email-error-login" className="popup__error" >{errors.email || ''}</span>
@@ -65,6 +60,7 @@ function Login(props) {
           placeholder="Введите пароль"
           minLength="5"
           maxLength="30"
+          autoComplete="on"
           required
         />
         <span id="password-error-login" className="popup__error" >{errors.password || ''}</span>

@@ -6,32 +6,29 @@ import Article from '../Article/Article';
 import Summary from '../Summary/Summary';
 
 function Articles({
-  isLoggedIn,
-  handleOpenLoginPopup,
-  handleDeleteSavedNews,
-  updateMySavedArticles,
   mySavedArticles,
-  // keyword,
+  ...props
 }) {
   return (
     <>
-      <Summary />
+      <Summary
+        mySavedArticles={mySavedArticles}
+      />
       {mySavedArticles.length > 0 && <section className="articles">
           {
-            mySavedArticles.map((article, index) => <Article
-              article={article}
-              key={index || article.id + article.url + Math.floor(Math.random())}
+            mySavedArticles.map((article) => <Article
+              mySavedArticle={article}
+              key={article.link + Math.random()}
               keyword={article.keyword}
               title={article.title}
-              date={article.publishedAt}
-              image={article.urlToImage}
-              link={article.url}
-              description={article.description}
-              source={article.source.name}
-              isLoggedIn={isLoggedIn}
-              handleOpenLoginPopup={handleOpenLoginPopup}
-              handleDeleteSavedNews={handleDeleteSavedNews}
-              updateMySavedArticles={updateMySavedArticles}
+              date={article.date}
+              image={article.image}
+              link={article.link}
+              description={article.text}
+              source={article.source}
+              isLoggedIn={props.isLoggedIn}
+              handleOpenLoginPopup={props.handleOpenLoginPopup}
+              updateMySavedArticles={props.updateMySavedArticles}
               mySavedArticles={mySavedArticles}
             />)
           }
@@ -43,20 +40,3 @@ function Articles({
 }
 
 export default Articles;
-
-// mySavedArticles.map((article, i) => <Article
-//               article={article}
-//               key={i + article.url}
-//               title={article.title}
-//               date={article.publishedAt}
-//               image={article.urlToImage}
-//               link={article.url}
-//               description={article.description}
-//               source={article.source.name}
-//               keyword={article.keyword || keyword}
-//               isLoggedIn={isLoggedIn}
-//               handleOpenLoginPopup={handleOpenLoginPopup}
-//               handleDeleteSavedNews={handleDeleteSavedNews}
-//               updateMySavedArticles={updateMySavedArticles}
-//               mySavedArticles={mySavedArticles}
-//             />)
