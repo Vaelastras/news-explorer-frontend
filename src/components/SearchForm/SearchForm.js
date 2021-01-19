@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './searchForm.css';
+import { handleKeywordFormatter } from '../../utils/helpers';
 
 function SearchForm({ handleNewsSearch }) {
   const [searchRequest, setSearchRequest] = useState('');
@@ -9,10 +10,9 @@ function SearchForm({ handleNewsSearch }) {
     e.preventDefault();
     if (searchRequest !== '') {
       handleNewsSearch(searchRequest);
-      setRequestError(false);
-    } else {
-      setRequestError(true);
+      return setRequestError(false);
     }
+    return setRequestError(true);
   }
 
   return (
@@ -24,8 +24,7 @@ function SearchForm({ handleNewsSearch }) {
           <input
             className="search__input"
             placeholder={`${requestError ? '⚠️ Нужно ввести ключевое слово! ⚠️' : 'Введите тему новости'}`}
-            onChange={ (e) => setSearchRequest(e.target.value) }
-            autoComplete="on"
+            onChange={ (e) => setSearchRequest(handleKeywordFormatter(e.target.value)) }
             required/>
           <button className="search__button">Искать</button>
         </div>

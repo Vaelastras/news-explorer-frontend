@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { scrollPageToTop } from '../../utils/helpers';
 import './footer.css';
 import gitLogo from '../../images/icons/github.png';
 import facebook from '../../images/icons/facebook.png';
 import gmail from '../../images/icons/email.png';
 import vk from '../../images/icons/vk.png';
 
-function Footer(props) {
-  const { scrollToTop } = props;
+function Footer() {
   return (
     <footer className="footer">
       <p className="footer__copyright">
@@ -16,7 +16,7 @@ function Footer(props) {
       <div className="footer__wrapper">
         <ul className="footer__links">
           <li className="footer__list">
-            <Link className="footer__link" to='/' onClick={scrollToTop}>Главная</Link>
+            <Link className="footer__link" to='/' onClick={scrollPageToTop}>Главная</Link>
           </li>
           <li className="footer__list">
             <a className="footer__link" href="https://praktikum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>

@@ -19,7 +19,7 @@ function Burger({
   const crossBurgerColorDark = `${pathname === '/saved-news' && !isOpenBurgerMenu ? 'burger__button_type_dark' : ''}`;
   const buttonSwitcher = isOpenBurgerMenu ? 'burger__button-cross' : 'burger__button';
   const burgerButtonColor = `${pathname === '/' ? logoutButtonLight : logoutButtonDark}`;
-  const buttonDisplayName = `${isLoggedIn ? `${currentUser.name}` : 'Авторизоваться'}`; // подключить контекст/стейт currentUser.name
+  const buttonDisplayName = `${isLoggedIn ? `${currentUser.name}` : 'Авторизоваться'}`;
 
   return (
     <div className="burger">

@@ -7,10 +7,9 @@ export default function getArticlesFromServer(keyword) {
   const worldTime = new Date();
   // переведем в ISO === "2020-12-28T08:31:12.577Z" и обрежем до дня
   const searchFrom = worldTime.toISOString().slice(0, 10);
-
   // установим в дату дату - 7 дней
   worldTime.setDate(worldTime.getDate() - DAY_DECREMENT);
-  // переведем в ISO переведем в ISO === "2020-12-28T08:31:12.577Z" и обрежем до дня
+  // переведем в ISO === "2020-12-28T08:31:12.577Z" и обрежем до дня
   const searchAt = worldTime.toISOString().slice(0, 10);
 
   // TODO: вернуть 100 запросов

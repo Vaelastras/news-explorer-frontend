@@ -4,17 +4,21 @@ import { Route, Redirect } from 'react-router-dom';
 // этот компонент принимает другой компонент в качестве пропса
 // он также может взять неограниченное число пропсов и передать их новому компоненту
 
-const ProtectedRoute = ({ component: Component, ...props }) => {
+const ProtectedRoute = ({ component: Component, handleOpenLoginPopup, ...props }) => {
   useEffect(() => {
-    if (!props.isLoggedIn) {
-      props.handleOpenLoginPopup();
+    if (!localStorage.getItem('login')) {
+      handleOpenLoginPopup();
     }
-  }, []);
+  });
 
   return (
     <Route>
       {
-        () => (props.isLoggedIn ? <Component {...props} /> : <Redirect to="./"/>)
+        () => (
+          localStorage.getItem('login')
+            ? <Component {...props} />
+            : <Redirect to="./"/>
+        )
       }
     </Route>
   );

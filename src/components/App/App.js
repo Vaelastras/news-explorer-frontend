@@ -25,7 +25,6 @@ import NoResult from '../NoResult/NoResult';
 // апи и утилиты
 import * as mainApi from '../../utils/MainApi';
 import getArticlesFromServer from '../../utils/NewsApi';
-import scrollToTop from '../../utils/topScroll';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // авторизационный стейт
@@ -49,19 +48,43 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [mySavedArticles, setMySavedArticles] = useState([]);
-
   const history = useHistory();
 
-  React.useEffect(() => {
+  function getSavedNews() {
+    mainApi.getAllArticles()
+      .then((data) => {
+        setMySavedArticles(data);
+        setKeyword(data.keyword);
+      });
+  }
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      setIsLoggedIn(true);
+      getSavedNews();
+      mainApi.getUserContent(jwt)
+        .then((res) => {
+          if (res) {
+            setCurrentUser(JSON.parse(localStorage.getItem('user')));
+            setIsLoggedIn(true);
+          }
+        });
+    }
+  }
+
+  useEffect(() => {
+    tokenCheck();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
     setKeyword(localStorage.getItem('keyword'));
   }, [keyword]);
 
-  // открытие бургерного меню
   function handleClickBurger() {
     setBurgerOpen(!burgerOpen);
   }
 
-  // закрытие всех попапов
   function closeAllPopups() {
     setOpenRegisterPopup(false);
     setOpenLoginPopup(false);
@@ -139,17 +162,20 @@ function App() {
       .then((res) => {
         localStorage.setItem('jwt', res.token);
         if (res) {
-          mainApi.getContent(res.token)
-            .then((user) => {
-              localStorage.setItem('user', JSON.stringify(user));
-              setCurrentUser(user);
+          mainApi.getUserContent(res.token)
+            .then((userData) => {
+              localStorage.setItem('user', JSON.stringify(userData));
+              setCurrentUser(userData);
               setIsLoggedIn(true);
+              setOpenNoResults(false);
+              setSearchError(null);
+              setKeyword('');
+              localStorage.setItem('login', true);
               closeAllPopups();
               history.push('./');
             })
             .catch((err) => {
               setShowErrorInPopup(`${err}`);
-              console.log(err.message);
             });
         }
       })
@@ -158,16 +184,17 @@ function App() {
           return setShowErrorInPopup('Неправильный логин или пароль');
         }
         if (err.status === 400) {
-          return setShowErrorInPopup('User is not defined. Please register!');
+          return setShowErrorInPopup('Такого пользователя не существует!');
         }
-        return setShowErrorInPopup('Service unavailable, try again later');
+        return setShowErrorInPopup('Вы взломали Пентагон, за вами выехали 👮🏻‍️');
       });
   }
 
   function handleLogout() {
-    localStorage.clear();
     setIsLoggedIn(false);
+    setOpenNoResults(false);
     setArticles([]);
+    localStorage.clear();
     history.push('/');
   }
 
@@ -192,22 +219,13 @@ function App() {
       .finally(() => setOpenPreloader(false));
   }
 
-  // получить сохранненные карты
-  function getSavedNews() {
-    mainApi.getAllArticles()
-      .then((data) => {
-        setMySavedArticles(data);
-        setKeyword(data.keyword);
-      });
-  }
-
   function handleSaveNews(article, tag) {
     if (isLoggedIn) {
       mainApi.saveArticle(article, tag)
-        .then(() => {
-          getSavedNews();
-        });
+        .then(() => getSavedNews())
+        .catch((err) => Promise.reject(new Error(`Error: ${err}`)));
     }
+    return '';
   }
 
   function handleDeleteSavedNews(article) {
@@ -217,14 +235,11 @@ function App() {
         setMySavedArticles(myArticleArray);
       })
       .catch((err) => {
-        console.log(err.message);
+        Promise.reject(new Error(`Error ${err}`));
       });
   }
 
-  // определяем какая статья, и либо ее сохраняем, либо удаляем
-
-  function updateMySavedArticles(article, tag, myArticle) {
-    // eslint-disable-next-line consistent-return,array-callback-return
+  function handleUpdateMySavedArticles(article, tag, myArticle) {
     const mySavedArticle = mySavedArticles.find((i) => {
       if (myArticle) {
         return i.title === myArticle.title && i.text === myArticle.text;
@@ -232,35 +247,14 @@ function App() {
       if (article) {
         return i.title === article.title && i.text === article.description;
       }
+      return null;
     });
 
     if (mySavedArticle) {
-      handleDeleteSavedNews(mySavedArticle);
-    } else {
-      handleSaveNews(article, tag);
+      return handleDeleteSavedNews(mySavedArticle);
     }
+    return handleSaveNews(article, tag);
   }
-
-  // f проверки токена
-  function tokenCheck() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      setIsLoggedIn(true);
-      getSavedNews();
-      mainApi.getContent(jwt)
-        .then((res) => {
-          if (res) {
-            setCurrentUser(JSON.parse(localStorage.getItem('user')));
-            setIsLoggedIn(true);
-          }
-        });
-    }
-  }
-
-  // проверка наличия токена в localstorage
-  useEffect(() => {
-    tokenCheck();
-  }, [isLoggedIn]);
 
   return (
     <div className='page'>
@@ -290,7 +284,7 @@ function App() {
               keyword={keyword}
               isLoggedIn={isLoggedIn}
               handleOpenLoginPopup={handleOpenLoginPopup}
-              updateMySavedArticles={updateMySavedArticles}
+              updateMySavedArticles={handleUpdateMySavedArticles}
             />
           </Route>
           <Route path='/saved-news'>
@@ -305,15 +299,13 @@ function App() {
               component={Articles}
               isLoggedIn={isLoggedIn}
               handleOpenLoginPopup={handleOpenLoginPopup}
-              updateMySavedArticles={updateMySavedArticles}
+              updateMySavedArticles={handleUpdateMySavedArticles}
               mySavedArticles={mySavedArticles}
               keyword={keyword}
             />
           </Route>
         </Switch>
-        <Footer
-          scrollToTop={scrollToTop}
-        />
+        <Footer/>
         <section className="popups">
           <Register
             isOpen={openRegisterPopup}

@@ -1,19 +1,17 @@
 import React from 'react';
 import './popupWithForm.css';
 
-function PopupWithForm(props) {
-  const {
-    isOpen,
-    name,
-    onSubmit,
-    title,
-    text,
-    children,
-    onClose,
-    onSwitchPopup,
-    buttonDescription,
-  } = props;
-
+function PopupWithForm({
+  isOpen,
+  name,
+  onSubmit,
+  title,
+  text,
+  children,
+  onClose,
+  onSwitchPopup,
+  buttonDescription,
+}) {
   return (
     <div className={(isOpen ? `popup popup_type_${name} popup_active` : `popup popup_type_${name}`)}>
       <div className="popup__container">

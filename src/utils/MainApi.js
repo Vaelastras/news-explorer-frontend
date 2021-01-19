@@ -1,5 +1,5 @@
-import newsDefaultImage from '../images/news-default.jpg';
 import { BASE_URL } from './constants';
+import { handleValidityUrl } from './helpers';
 
 // регистрация нового пользователя
 export const createUser = (email, password, name) => fetch(`${BASE_URL}/signup`, {
@@ -35,7 +35,7 @@ export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
   });
 
 // проверка токена
-export const getContent = (token) => fetch(`${BASE_URL}/users/me`, {
+export const getUserContent = (token) => fetch(`${BASE_URL}/users/me`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ export const saveArticle = (article, keyword) => {
         date: publishedAt,
         source: source.name,
         link: url,
-        image: urlToImage || newsDefaultImage,
+        image: handleValidityUrl(urlToImage) ? urlToImage : 'https://i.ibb.co/3SkSn1X/news-default.jpg', // все равно будет баг если с апи прилетает что-то типа https:// - мб нужна валидация на этом этапе??
       }),
     },
   )
