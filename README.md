@@ -26,4 +26,4 @@ You will also see any lint errors in the console.
 -----
 ###More images for CR: 
 
-![Хеллоууу!](https://static.daru-dar.org/s1024/01/01/39/13/3913d23c0f9d06a7783e7562a64991739bc81214.jpg)
+![Хеллоууу!](https://i-a.d-cd.net/m0AAAgGjsOA-1920.jpg)
