@@ -24,6 +24,6 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 -----
-###More images for CR: 
+### More images for CR: 
 
-![Хеллоууу!](https://i-a.d-cd.net/m0AAAgGjsOA-1920.jpg)
+![Привет](https://sun1-47.userapi.com/yNksnR3UxwT15oUQhIgq8S43c7F0NqIHuQM26A/fJDO0KVL4eQ.jpg)
