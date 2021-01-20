@@ -2,9 +2,9 @@ import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import './popupConfirm.css';
 
-export default function PopupConfirm(props) {
-  const { isOpen, onClose, onLogin } = props;
-
+export default function PopupConfirm(
+  { isOpen, onClose, onLogin },
+) {
   return (
     <PopupWithForm
       isOpen={isOpen}

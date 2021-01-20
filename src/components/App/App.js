@@ -29,6 +29,7 @@ import getArticlesFromServer from '../../utils/NewsApi';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // авторизационный стейт
   const [currentUser, setCurrentUser] = useState({}); // стейт данных по юзеру
+  const [formFieldDisabled, setFormFieldDisabled] = useState(false); // стейт блокировки инпутов при отправке. хотя по уму лучше бы блочить форму
 
   // стейты показа компонентов в поиске статей
   const [openPreloader, setOpenPreloader] = useState(false);
@@ -48,6 +49,7 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [mySavedArticles, setMySavedArticles] = useState([]);
+
   const history = useHistory();
 
   function getSavedNews() {
@@ -55,6 +57,9 @@ function App() {
       .then((data) => {
         setMySavedArticles(data);
         setKeyword(data.keyword);
+      })
+      .catch((err) => {
+        Promise.reject(new Error(`Error: ${err}`));
       });
   }
 
@@ -69,6 +74,9 @@ function App() {
             setCurrentUser(JSON.parse(localStorage.getItem('user')));
             setIsLoggedIn(true);
           }
+        })
+        .catch((err) => {
+          Promise.reject(new Error(`Error: ${err}`));
         });
     }
   }
@@ -91,19 +99,17 @@ function App() {
     setOpenConfirmPopup(false);
   }
 
-  // открытие окна регистрации
   function handleOpenRegisterPopup() {
     setShowErrorInPopup(null);
     setOpenRegisterPopup(true);
   }
 
-  // открытие окна логина
   function handleOpenLoginPopup() {
     setShowErrorInPopup(null);
+    setOpenConfirmPopup(false);
     setOpenLoginPopup(true);
   }
 
-  // переключатель попапов
   function handlePopupSwitcher() {
     if (openRegisterPopup) {
       closeAllPopups();
@@ -138,26 +144,31 @@ function App() {
   }, []);
 
   function handleRegister(email, password, name) {
+    setFormFieldDisabled(true);
     mainApi.createUser(email, password, name)
       .then((res) => {
         if (res) {
           closeAllPopups();
           setOpenConfirmPopup(true);
           history.push('./');
+          setFormFieldDisabled(false);
         }
       })
       .catch((errCode) => {
         if (errCode === 409) {
+          setFormFieldDisabled(false);
           return setShowErrorInPopup('Email уже регистрировался');
         }
         if (errCode === 429) {
+          setFormFieldDisabled(false);
           return setShowErrorInPopup('Превышено количество запросов');
         }
-        return '';
+        return setFormFieldDisabled(false);
       });
   }
 
   function handleLogin(email, password) {
+    setFormFieldDisabled(true);
     mainApi.authorizeUser(email, password)
       .then((res) => {
         localStorage.setItem('jwt', res.token);
@@ -172,9 +183,11 @@ function App() {
               setKeyword('');
               localStorage.setItem('login', true);
               closeAllPopups();
+              setFormFieldDisabled(false);
               history.push('./');
             })
             .catch((err) => {
+              setFormFieldDisabled(false);
               setShowErrorInPopup(`${err}`);
             });
         }
@@ -211,12 +224,13 @@ function App() {
           setSearchError(false);
           setOpenNoResults(true);
         }
+        setOpenPreloader(false);
       })
       .catch((err) => {
+        setOpenPreloader(false);
         setOpenNoResults(true);
         setSearchError(err.message);
-      })
-      .finally(() => setOpenPreloader(false));
+      });
   }
 
   function handleSaveNews(article, tag) {
@@ -239,17 +253,16 @@ function App() {
       });
   }
 
-  function handleUpdateMySavedArticles(article, tag, myArticle) {
+  function handleUpdateMySavedArticles(article, tag, mySavedNews) {
     const mySavedArticle = mySavedArticles.find((i) => {
-      if (myArticle) {
-        return i.title === myArticle.title && i.text === myArticle.text;
+      if (mySavedNews) {
+        return i.title === mySavedNews.title && i.text === mySavedNews.text;
       }
       if (article) {
         return i.title === article.title && i.text === article.description;
       }
       return null;
     });
-
     if (mySavedArticle) {
       return handleDeleteSavedNews(mySavedArticle);
     }
@@ -313,6 +326,7 @@ function App() {
             onSwitchPopup={handlePopupSwitcher}
             onRegister={handleRegister}
             textError={showErrorInPopup}
+            isFieldDisabled={formFieldDisabled}
           />
           <Login
             isOpen={openLoginPopup}
@@ -320,11 +334,12 @@ function App() {
             onSwitchPopup={handlePopupSwitcher}
             onLogin={handleLogin}
             textError={showErrorInPopup}
+            isFieldDisabled={formFieldDisabled}
           />
           <PopupConfirm
            isOpen={openConfirmPopup}
            onClose={closeAllPopups}
-           onLogin={handleLogin}
+           onLogin={handleOpenLoginPopup}
           />
         </section>
       </CurrentUserContext.Provider>

@@ -3,11 +3,9 @@ import './Register.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
-function Register(props) {
-  const {
-    isOpen, onClose, onSwitchPopup, onRegister, textError,
-  } = props;
-
+function Register({
+  isOpen, onClose, onSwitchPopup, onRegister, textError, isFieldDisabled,
+}) {
   const {
     values, handleChange, errors, isValid, resetForm,
   } = Validator();
@@ -18,6 +16,7 @@ function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     onRegister(values.email, values.password, values.name);
   }
 
@@ -43,7 +42,6 @@ function Register(props) {
         placeholder="Введите почту"
         minLength="5"
         maxLength="30"
-        // autoСomplete="on"
         required
       />
       <span id="email-register-error" className="popup__error" >{errors.email || ''}</span>
@@ -59,7 +57,7 @@ function Register(props) {
         placeholder="Введите пароль"
         minLength="5"
         maxLength="30"
-        // autoСomplete="on"
+        disabled={isFieldDisabled}
         required
       />
       <span id="password-error-register" className="popup__error" >{errors.password || ''}</span>
@@ -75,7 +73,7 @@ function Register(props) {
         placeholder="Введите своё имя"
         minLength="2"
         maxLength="30"
-        // autoСomplete="on"
+        disabled={isFieldDisabled}
         required
       />
       <span id="name-error-register" className="popup__error"> {errors.name || ''} </span>

@@ -4,7 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Validator from '../../utils/Validator';
 
 function Login({
-  isOpen, onClose, onSwitchPopup, onLogin, textError,
+  isOpen, onClose, onSwitchPopup, onLogin, textError, isFieldDisabled,
 }) {
   const {
     values,
@@ -45,6 +45,7 @@ function Login({
           minLength="5"
           maxLength="30"
           autoComplete="on"
+          disabled={isFieldDisabled}
           required
         />
         <span id="email-error-login" className="popup__error" >{errors.email || ''}</span>
@@ -61,6 +62,7 @@ function Login({
           minLength="5"
           maxLength="30"
           autoComplete="on"
+          disabled={isFieldDisabled}
           required
         />
         <span id="password-error-login" className="popup__error" >{errors.password || ''}</span>
