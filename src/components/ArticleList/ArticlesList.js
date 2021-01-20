@@ -12,7 +12,7 @@ function ArticlesList({
   mySavedArticles,
 }) {
   const [renderArticles, setRenderArticles] = useState([]);
-  const [buttonHidded, setButtonHidden] = useState(true);
+  const [buttonHidden, setButtonHidden] = useState(true);
 
   useEffect(() => {
     setRenderArticles(articles.slice(0, CARDS_TO_SHOW));
@@ -22,9 +22,6 @@ function ArticlesList({
     return setButtonHidden(true);
   }, [articles]);
 
-  // записать в стейт рендера начальный массив артиклов -
-  // отрезать по +3 карты
-  // повторить пока длина массива рендера не будет >= 3 чем начальный массив - тогда спрячем кнопку
   function showMoreArticles() {
     setRenderArticles(articles.slice(0, renderArticles.length + CARDS_TO_SHOW));
     if (renderArticles.length >= articles.length - CARDS_TO_SHOW) {
@@ -54,7 +51,7 @@ function ArticlesList({
             />)
         }
       </div>
-      {articles.length > 3 && <button onClick={showMoreArticles} className={buttonHidded ? 'articles-list__button' : 'articles-list__button_hidden'}>Показать еще</button>}
+      {articles.length > 3 && <button onClick={showMoreArticles} className={buttonHidden ? 'articles-list__button' : 'articles-list__button_hidden'}>Показать еще</button>}
     </section>
   );
 }

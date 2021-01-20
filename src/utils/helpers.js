@@ -20,3 +20,12 @@ export const handleValidityUrl = (url) => {
   }
   return isValidLink;
 };
+
+// форматиоует дату для показа в артикле
+export const handleDateFormatter = (date) => {
+  const month = [
+    'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
+  ];
+  const timeIsNow = new Date(date);
+  return `${timeIsNow.getDate()} ${month[timeIsNow.getMonth()]} ${timeIsNow.getFullYear()} `;
+};

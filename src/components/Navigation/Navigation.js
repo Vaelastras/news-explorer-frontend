@@ -17,7 +17,7 @@ function Navigation({ isLoggedIn, isOpenLoginPopup, isLogout }) {
   const navButtonLogout = `${pathname === '/saved-news' ? 'navigation__button navigation__button_type_logout' : 'navigation__button_type_hidden'}`;
   const navButtonColor = `${pathname === '/' ? logoutButtonLight : logoutButtonDark}`;
 
-  const buttonDisplayName = `${isLoggedIn ? `${currentUser.name}` : 'Авторизоваться'}`; // подключить контекст/стейт currentUser.name
+  const buttonDisplayName = `${isLoggedIn ? `${currentUser.name}` : 'Авторизоваться'}`;
   return (
     <nav className="navigation">
       <div className="navigation__container">

@@ -44,7 +44,7 @@ function Summary({ mySavedArticles }) {
     <section className='summary'>
       <div className="summary__wrapper">
         <p className="summary__subtitle">Сохраненные статьи</p>
-        <h3 className="summary__title">{currentUser.name}, у вас {count > 0 ? count : 'нет'} сохраненн{handleTitleSaveNewsRewritter(count)}</h3>
+        <h3 className="summary__title">{currentUser.name}, у вас {count > 0 ? count : 'ещё нет'} сохраненн{handleTitleSaveNewsRewritter(count)}</h3>
         {mySavedArticles.length > 0 && (
         <p className="summary__keyword">По ключев{handleSubtitleRewritter(mySavedKeywords.length)}:
           <span className="summary__keyword_type_bold"> {mySavedKeywords.length < 2 ? firstKeyword : keywords }</span>

@@ -12,7 +12,8 @@ export const createUser = (email, password, name) => fetch(`${BASE_URL}/signup`,
       return res.json();
     }
     return Promise.reject(res.status);
-  });
+  })
+  .catch((err) => Promise.reject(new Error(`Server Error :${err}`)));
 
 // авторизация существующего пользователя
 export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
@@ -32,7 +33,8 @@ export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
       localStorage.setItem('jwt', data.token);
       return data;
     }
-  });
+  })
+  .catch((err) => Promise.reject(new Error(`Server Error ${err}`)));
 
 // проверка токена
 export const getUserContent = (token) => fetch(`${BASE_URL}/users/me`, {
@@ -63,11 +65,11 @@ export const getAllArticles = () => fetch(
   },
 )
   .then((res) => res.json())
-  .catch((err) => Promise.reject(err.message));
+  .catch((err) => Promise.reject(new Error(`Error: ${err}`)));
 
 // удаление серверной карточки
-export const deleteArticle = (articleId) => fetch(
-  `${BASE_URL}/articles/${articleId._id}`,
+export const deleteArticle = (article) => fetch(
+  `${BASE_URL}/articles/${article._id}`,
   {
     method: 'DELETE',
     headers: {
@@ -75,8 +77,9 @@ export const deleteArticle = (articleId) => fetch(
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   },
-).then((res) => res.json())
-  .catch((err) => Promise.reject(err.message));
+)
+  .then((res) => res.json())
+  .catch((err) => Promise.reject(new Error(`Error: ${err}`)));
 
 // сохранить карту в своем апи
 export const saveArticle = (article, keyword) => {
@@ -88,6 +91,7 @@ export const saveArticle = (article, keyword) => {
     url,
     urlToImage,
   } = article;
+
   return fetch(
     `${BASE_URL}/articles`,
     {
@@ -103,10 +107,10 @@ export const saveArticle = (article, keyword) => {
         date: publishedAt,
         source: source.name,
         link: url,
-        image: handleValidityUrl(urlToImage) ? urlToImage : 'https://i.ibb.co/3SkSn1X/news-default.jpg', // все равно будет баг если с апи прилетает что-то типа https:// - мб нужна валидация на этом этапе??
+        image: handleValidityUrl(urlToImage) ? urlToImage : 'https://i.ibb.co/3SkSn1X/news-default.jpg', // все равно будет баг если с апи прилетает кривая ссылка по типу http://rg.ru/cgi-?http://.
       }),
     },
   )
     .then((res) => res.json())
-    .catch((err) => Promise.reject(err.message));
+    .catch((err) => Promise.reject(new Error(`Error: ${err}`)));
 };

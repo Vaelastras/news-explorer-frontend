@@ -12,7 +12,7 @@ function Main({
   updateMySavedArticles,
 }) {
   return (
-    <main className='content'>
+    <main className="content">
       <ArticlesList
         articles={articles}
         mySavedArticles={mySavedArticles}

@@ -23,7 +23,7 @@ function SearchForm({ handleNewsSearch }) {
         <div className="search__wrapper">
           <input
             className="search__input"
-            placeholder={`${requestError ? '⚠️ Нужно ввести ключевое слово! ⚠️' : 'Введите тему новости'}`}
+            placeholder={`${requestError ? 'Вам нужно ввести ключевое слово ‼️️' : 'Введите тему новости'}`}
             onChange={ (e) => setSearchRequest(handleKeywordFormatter(e.target.value)) }
             required/>
           <button className="search__button">Искать</button>

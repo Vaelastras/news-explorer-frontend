@@ -179,7 +179,7 @@ function App() {
               setCurrentUser(userData);
               setIsLoggedIn(true);
               setOpenNoResults(false);
-              setSearchError(null);
+              setSearchError(null); // можно ставить false
               setKeyword('');
               localStorage.setItem('login', true);
               closeAllPopups();
