@@ -82,6 +82,12 @@ function App() {
   }
 
   useEffect(() => {
+    if (localStorage.getItem('articles') !== null || undefined) {
+      setArticles(JSON.parse(localStorage.getItem('articles')));
+    }
+  }, []);
+
+  useEffect(() => {
     tokenCheck();
   }, [isLoggedIn]);
 
@@ -171,8 +177,10 @@ function App() {
     setFormFieldDisabled(true);
     mainApi.authorizeUser(email, password)
       .then((res) => {
-        localStorage.setItem('jwt', res.token);
         if (res) {
+          localStorage.clear();
+          setArticles([]);
+          localStorage.setItem('jwt', res.token);
           mainApi.getUserContent(res.token)
             .then((userData) => {
               localStorage.setItem('user', JSON.stringify(userData));
@@ -188,18 +196,23 @@ function App() {
             })
             .catch((err) => {
               setFormFieldDisabled(false);
-              setShowErrorInPopup(`${err}`);
+              setShowErrorInPopup(err);
             });
         }
       })
+      // eslint-disable-next-line consistent-return
       .catch((err) => {
-        if (err.status === 401) {
+        setFormFieldDisabled(false);
+        if (err === '401') {
+          console.log('401', err);
           return setShowErrorInPopup('Неправильный логин или пароль');
         }
-        if (err.status === 400) {
+        if (err === '400') {
+          console.log('400', err);
           return setShowErrorInPopup('Такого пользователя не существует!');
         }
-        return setShowErrorInPopup('Вы взломали Пентагон, за вами выехали 👮🏻‍️');
+        console.dir(err);
+        return setShowErrorInPopup('err');
       });
   }
 

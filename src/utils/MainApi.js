@@ -21,11 +21,12 @@ export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email, password }),
 })
+  // eslint-disable-next-line consistent-return
   .then((res) => {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(res);
+    return Promise.reject(res.status);
   })
   // eslint-disable-next-line consistent-return
   .then((data) => {
@@ -34,7 +35,8 @@ export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
       return data;
     }
   })
-  .catch((err) => Promise.reject(new Error(`Server Error ${err}`)));
+  // eslint-disable-next-line prefer-promise-reject-errors
+  .catch((err) => Promise.reject(`${err}`));
 
 // проверка токена
 export const getUserContent = (token) => fetch(`${BASE_URL}/users/me`, {
