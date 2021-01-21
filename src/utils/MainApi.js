@@ -13,7 +13,7 @@ export const createUser = (email, password, name) => fetch(`${BASE_URL}/signup`,
     }
     return Promise.reject(res.status);
   })
-  .catch((err) => Promise.reject(new Error(`Server Error :${err}`)));
+  .catch((err) => Promise.reject(err));
 
 // авторизация существующего пользователя
 export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
@@ -36,7 +36,7 @@ export const authorizeUser = (email, password) => fetch(`${BASE_URL}/signin`, {
     }
   })
   // eslint-disable-next-line prefer-promise-reject-errors
-  .catch((err) => Promise.reject(`${err}`));
+  .catch((err) => Promise.reject(err));
 
 // проверка токена
 export const getUserContent = (token) => fetch(`${BASE_URL}/users/me`, {

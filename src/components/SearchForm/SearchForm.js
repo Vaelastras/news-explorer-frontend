@@ -10,6 +10,7 @@ function SearchForm({ handleNewsSearch }) {
     e.preventDefault();
     if (searchRequest !== '') {
       handleNewsSearch(searchRequest);
+      setSearchRequest('');
       return setRequestError(false);
     }
     return setRequestError(true);
@@ -22,6 +23,7 @@ function SearchForm({ handleNewsSearch }) {
         <p className="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
         <div className="search__wrapper">
           <input
+            value={searchRequest}
             className="search__input"
             placeholder={`${requestError ? 'Вам нужно ввести ключевое слово ‼️️' : 'Введите тему новости'}`}
             onChange={ (e) => setSearchRequest(handleKeywordFormatter(e.target.value)) }

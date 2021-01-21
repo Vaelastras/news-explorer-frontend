@@ -169,6 +169,7 @@ function App() {
           setFormFieldDisabled(false);
           return setShowErrorInPopup('Превышено количество запросов');
         }
+        setShowErrorInPopup('Что-то пошло не так, попробуйте позже');
         return setFormFieldDisabled(false);
       });
   }
@@ -203,16 +204,13 @@ function App() {
       // eslint-disable-next-line consistent-return
       .catch((err) => {
         setFormFieldDisabled(false);
-        if (err === '401') {
-          console.log('401', err);
+        if (err === 401) {
           return setShowErrorInPopup('Неправильный логин или пароль');
         }
-        if (err === '400') {
-          console.log('400', err);
+        if (err === 400) {
           return setShowErrorInPopup('Такого пользователя не существует!');
         }
-        console.dir(err);
-        return setShowErrorInPopup('err');
+        return setShowErrorInPopup('Сервис на профилактике. Повторите попытку позднее');
       });
   }
 
