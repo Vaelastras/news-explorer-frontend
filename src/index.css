@@ -1,0 +1,9 @@
+@import "./vendor/normalize.css";
+@import "./fonts/fonts.css";
+
+.page {
+  position: relative;
+  max-width: 1440px;
+  background-color: white;
+  margin: 0 auto;
+}
